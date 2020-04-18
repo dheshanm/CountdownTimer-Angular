@@ -1,0 +1,14 @@
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
+@import '~@angular/material/theming';
+
+.toolbar-main {
+  @include mat-elevation-transition;
+  @include mat-elevation(4);
+
+  &:hover {
+    @include mat-elevation(6);
+  }
+}
