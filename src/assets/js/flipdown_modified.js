@@ -40,6 +40,7 @@ class FlipDown {
   
       // FlipDown DOM element
       this.element = document.getElementById(el);
+      console.log(this.element)
   
       // Rotor DOM elements
       this.rotors = [];

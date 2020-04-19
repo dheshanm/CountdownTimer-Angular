@@ -16,13 +16,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FlipclockComponent } from './components/flipclock/flipclock.component';
 import { FeaturedCardComponent } from './components/featured-card/featured-card.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     FlipclockComponent,
-    FeaturedCardComponent
+    FeaturedCardComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
