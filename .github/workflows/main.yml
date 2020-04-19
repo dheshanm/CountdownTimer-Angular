@@ -1,0 +1,33 @@
+name: Firebase Deployment
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  firebase-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkingout latest commits from repo
+      uses: actions/checkout@master
+      
+    - name: Setting up Node v10.x 
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+
+    - name: Installing Dependencies
+      run: npm install
+    
+    - name: Building with Production FLAG
+      run: npm run build:prod
+      
+    - name: Deploying to Firebase
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting --project countdowntimer-angular
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
