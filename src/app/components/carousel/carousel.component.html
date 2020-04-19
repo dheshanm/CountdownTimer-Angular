@@ -1,15 +1,12 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
+    <ul class="carousel-item active">
       <!-- <img src="..." class="d-block w-100" alt="..."> -->
-      <app-featured-card></app-featured-card>
-    </div>
-    <div class="carousel-item">
-      <app-featured-card></app-featured-card>
-    </div>  
-    <div class="carousel-item">
-      <app-featured-card></app-featured-card>
-    </div>
+      <app-featured-card [data]='init'></app-featured-card>
+    </ul>
+    <ul  *ngFor='let item of data' class="carousel-item">
+      <app-featured-card [data]='item'></app-featured-card>
+    </ul>  
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <div class="example-button-container">

@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FlipclockComponent } from './components/flipclock/flipclock.component';
 import { FeaturedCardComponent } from './components/featured-card/featured-card.component';
@@ -36,6 +37,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     MatIconModule,
     MatChipsModule,
     MatCardModule,
+    MatDividerModule,
     AvatarModule
   ],
   providers: [],
