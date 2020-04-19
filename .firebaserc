@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "countdowntimer-angular": {
+      "hosting": {
+        "countdown": [
+          "countdowntimer-angular"
+        ]
+      }
+    }
+  }
+}
