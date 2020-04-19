@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import FlipDown from '../../../assets/js/flipdown_modified.js'
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import FlipDown from '../../../assets/js/flipdown_modified.js';
 
 @Component({
   selector: 'app-flipclock',
@@ -9,13 +9,13 @@ import FlipDown from '../../../assets/js/flipdown_modified.js'
   encapsulation: ViewEncapsulation.None
 })
 export class FlipclockComponent implements OnInit {
+  @Input() time_unix: number;
 
   constructor() { }
 
   ngOnInit(): void {
-    var twoDaysFromNow = (new Date().getTime() / 1000) + (86400 * 2);
-    var aYearsWorth = (new Date().getTime() / 1000) + 31536000;
-    let cd = new FlipDown(aYearsWorth).start();
+    // var aYearsWorth = (new Date().getTime() / 1000) + 31536000;
+    const cd = new FlipDown(this.time_unix).start();
   }
 }
 

@@ -1,0 +1,29 @@
+<div class="center">
+<mat-card class="feature-card">
+    <mat-card-header>
+        <ngx-avatar mat-card-avatar class="avatar-header-image" name="{{ data.subtitle }}"></ngx-avatar>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>{{ data.title }}</mat-card-title>
+        <mat-card-subtitle *ngIf='data.subtitle'>{{ data.subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="center">
+        <app-flipclock [time_unix]='data.time_unix'></app-flipclock>
+    </div>
+    <mat-card-content *ngIf='data.content'>
+        <p>{{ data.content }}</p>
+        <p *ngIf='data.tags'>
+            <mat-chip-list class="center" aria-label="Tags">
+                <!-- <b>Tags: </b> -->
+                <mat-chip *ngFor='let tag of data.tags'>{{ tag }}</mat-chip>
+            </mat-chip-list>
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <span class="flex-spacer"></span>
+        <button mat-button>TRACK</button>
+        <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>
+</div>
+
+

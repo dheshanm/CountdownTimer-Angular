@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+
+.feature-card {
+  max-width: 800px;
+  margin: 2em;;
+
+  @include mat-elevation-transition;
+  @include mat-elevation(4);
+
+  &:hover {
+    @include mat-elevation(6);
+  }
+}
+
+.avatar-header-image {
+  background-size: cover;
+  padding-right: .5em;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
