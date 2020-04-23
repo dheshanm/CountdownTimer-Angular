@@ -17,22 +17,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FlipclockComponent } from './components/flipclock/flipclock.component';
 import { FeaturedCardComponent } from './components/featured-card/featured-card.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CdListComponent } from './components/cd-list/cd-list.component';
 import { CdListitemComponent } from './components/cd-listitem/cd-listitem.component';
+import { Page404Component } from './components/page404/page404.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
     FlipclockComponent,
     FeaturedCardComponent,
     CarouselComponent,
     CdListComponent,
-    CdListitemComponent
+    CdListitemComponent,
+    Page404Component,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

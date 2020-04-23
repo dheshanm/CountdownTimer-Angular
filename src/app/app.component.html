@@ -1,5 +1,36 @@
-<app-toolbar></app-toolbar>
+<mat-toolbar color="primary">
+    <mat-toolbar-row class="toolbar-main">
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span routerLink=''>Countdown Timer</span>
+      <span class="flex-spacer"></span>
+      <div fxShow="true" fxHide.lt-md="true">
+        <a mat-button [routerLink]="'/account'"> My Account </a>
+        <a mat-button [routerLink]="'/signup'"> Create Account </a>
+        <a mat-button [routerLink]="'/activities'"> Activities </a>
+        <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
+      </div>
+    </mat-toolbar-row>
+    <!-- <mat-toolbar-row>
+        <span style="font-size: 12px;">Countdown Timer helps you track time left until an Event or Activity is Scheduled.</span>
+    </mat-toolbar-row> -->
+  </mat-toolbar>
 
-<!-- Add elements under 'app-toolbar's Main content section -->
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+      <a mat-button [routerLink]="'/account'"> My Account </a>
+      <a mat-button [routerLink]="'/signup'"> Create Account </a>
+      <a mat-button [routerLink]="'/activities'"> Activities </a>
+      <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
 
-<router-outlet></router-outlet>
+    <!-- Main Content -->
+    <router-outlet></router-outlet>
+        
+  </mat-sidenav-content>
+</mat-sidenav-container>
