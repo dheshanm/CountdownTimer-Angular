@@ -2,7 +2,7 @@
 
 .feature-card {
   max-width: 800px;
-  margin: 2em;;
+  margin: 2em;
 
   @include mat-elevation-transition;
   @include mat-elevation(4);
