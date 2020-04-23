@@ -21,6 +21,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FlipclockComponent } from './components/flipclock/flipclock.component';
 import { FeaturedCardComponent } from './components/featured-card/featured-card.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { CdListComponent } from './components/cd-list/cd-list.component';
+import { CdListitemComponent } from './components/cd-listitem/cd-listitem.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     ToolbarComponent,
     FlipclockComponent,
     FeaturedCardComponent,
-    CarouselComponent
+    CarouselComponent,
+    CdListComponent,
+    CdListitemComponent
   ],
   imports: [
     BrowserModule,

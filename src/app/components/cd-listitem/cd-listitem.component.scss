@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+.feature-card {
+  max-width: 1000px;
+  width: 80vw;
+  //margin: 2em;
+}
+
+.avatar-header-image {
+  background-size: cover;
+  padding-right: .5em;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.button-row {
+  display: table-cell;
+}
+
+.button-row button {
+  display: table-cell;
+  margin-right: 8px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.flip {
+  zoom: .5;
+}
