@@ -6,11 +6,11 @@
             <mat-card-title>{{ data.title }}</mat-card-title>
             <mat-card-subtitle *ngIf='data.subtitle'>{{ data.subtitle }}</mat-card-subtitle>
             <span class="flex-spacer"></span>
-            <div class="center flip" fxHide="true" fxShow.gt fxShow.lg fxShow.md >
+            <div class="center flip-s" fxHide="true" fxShow.gt fxShow.lg fxShow.md >
                 <app-flipclock [time_unix]='data.time_unix'></app-flipclock>
             </div>
         </mat-card-header>
-        <div class="center flip" fxShow="true" fxHide.gt fxHide.lg fxHide.md>
+        <div class="center flip-l" fxShow="true" fxHide.gt fxHide.lg fxHide.md>
             <app-flipclock [time_unix]='data.time_unix'></app-flipclock>
         </div>
         <mat-card-content *ngIf='data.content'>
