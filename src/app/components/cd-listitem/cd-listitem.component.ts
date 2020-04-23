@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { FirebaseServiceService } from "../../services/firebase-service.service"
 import { Event } from '../../models/event';
 
 @Component({
@@ -10,8 +11,14 @@ import { Event } from '../../models/event';
 export class CdListitemComponent implements OnInit {
   @Input() data: Event;
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseServiceService) { }
 
   ngOnInit(): void { }
+
+  incrementCount(item: Event): void {
+    this.firebaseService.incrementCount(item);
+    console.log("Incrementing");
+    console.log(item);
+  }
   
 }

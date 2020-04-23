@@ -34,6 +34,14 @@ import { Page404Component } from './components/page404/page404.component';
 import { HomeComponent } from './components/home/home.component';
 import { CreateCdComponent } from './components/create-cd/create-cd.component';
 
+// Firebase and Firestore Imports
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment.prod';
+
+// Services
+import {FirebaseServiceService} from './services/firebase-service.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,8 +77,10 @@ import { CreateCdComponent } from './components/create-cd/create-cd.component';
     AvatarModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'countdowntimer-angular'),
+    AngularFirestoreModule
   ],
-  providers: [],
+  providers: [FirebaseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

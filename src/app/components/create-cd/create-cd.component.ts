@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
 
+import { FirebaseServiceService } from '../../services/firebase-service.service'
+
 import { Event } from '../../models/event';
 
 @Component({
@@ -18,7 +20,7 @@ export class CreateCdComponent implements OnInit {
   
   data: Event;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService) { }
 
   ngOnInit(): void { 
     this.nameFormGroup = this.fb.group({
@@ -36,6 +38,7 @@ export class CreateCdComponent implements OnInit {
     this.data = {
       title: "Title",
       subtitle: "Subtitle",
+      count: 1,
       content: "Sample Content",
       time_unix: (new Date().getTime() / 1000) + (60*60*24),
       tags: ["Tag 1", "Tag 2"]
@@ -53,7 +56,16 @@ export class CreateCdComponent implements OnInit {
     }
   }
 
-  processForm() {
+  validate(data: Event): boolean{
+    let flag = true;
+
+    if (data.title == '' || data.subtitle == '' || data.time_unix == null) {
+      flag = false;
+    }
+    return flag;
+  }
+
+  processForm(bool) {
     let temp1 = this.nameFormGroup.value;
     let temp2 = this.descriptionFormGroup.value;
 
@@ -61,18 +73,33 @@ export class CreateCdComponent implements OnInit {
       title: temp1['title'],
       subtitle: temp1['subtitle'],
       isFeatured: temp1['isFeatured'],
+      count: 1,
       content: temp2['content'],
       time_unix: (new Date(temp2['datetime']).getTime() / 1000) + (60*60),
       tags: this.processTags(temp2['tags'])
     }
 
-    console.log(this.data);
+    if(!bool){
+      console.log(this.data);
+    } else {
+      if (this.validate(this.data)) {
+        this.firebaseService.addItem(this.data);
+        console.log("Sucessfullt submitted");
+      }
+      else {
+        console.log("Validation failed");
+      }
+    }
 
     return temp2;
   }
 
   onSubmit() {
-    this.processForm();
+    this.processForm(true);
+  }
+
+  onPreview() {
+    this.processForm(false);
   }
 
 }

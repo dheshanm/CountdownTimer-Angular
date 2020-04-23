@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FirebaseServiceService } from '../../services/firebase-service.service';
 import { Event } from '../../models/event';
 
 @Component({
@@ -10,20 +11,12 @@ import { Event } from '../../models/event';
 export class CdListComponent implements OnInit {
   data: Event[] = [];
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseServiceService) { }
 
   ngOnInit(): void {
-    for(let i = 0; i<3; i++){
-      let temp: Event = {};
-
-      temp.title = 'Westworld S03E8 Passed Down';
-      temp.subtitle = 'Wetworld HBO';
-      temp.content = 'Nine noble families wage war against each other in order to gain control over the mythical land of Westeros. Meanwhile, a force is rising after millenniums and threatens the existence of living men.';
-      temp.time_unix = 1618849541;
-      temp.tags = ['HBO', 'Westworld', 'TV Shows'];
-
-      this.data.push(temp)
-    }
+    this.firebaseService.getItems().subscribe(items => {
+      this.data = items;
+    });
   }
 
 }

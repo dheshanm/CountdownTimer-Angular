@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {FirebaseServiceService} from "../../services/firebase-service.service";
 
 import { Event } from '../../models/event';
 
@@ -10,10 +11,16 @@ import { Event } from '../../models/event';
 export class FeaturedCardComponent implements OnInit {
   @Input() data: Event;
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseServiceService) { }
 
   ngOnInit(): void {
     console.log(this.data);
+  }
+
+  incrementCount(item: Event): void {
+    this.firebaseService.incrementCount(item);
+    console.log("Incrementing");
+    console.log(item);
   }
 
 }
