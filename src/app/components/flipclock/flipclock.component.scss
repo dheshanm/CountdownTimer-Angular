@@ -213,7 +213,8 @@
 @media (max-width: 550px) {
 
   .flipdown {
-    width: 312px;
+    //width: 312px;
+    zoom: 0.8;
     height: 70px;
   }
 
