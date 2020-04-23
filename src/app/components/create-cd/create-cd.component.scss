@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+.feature-card {
+  max-width: 800px;
+  margin: 2em;
+
+  @include mat-elevation-transition;
+  @include mat-elevation(4);
+
+  &:hover {
+    @include mat-elevation(6);
+  }
+}
+
+.avatar-header-image {
+  background-size: cover;
+  padding-right: .5em;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.ull-width {
+  width: 100%;
+}
+
+h2 {
+  padding-top: 1em;
+}
