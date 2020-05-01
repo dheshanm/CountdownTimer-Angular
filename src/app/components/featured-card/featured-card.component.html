@@ -19,9 +19,15 @@
             </p>
         </mat-card-content>
         <mat-card-actions>
-            <span class="flex-spacer"></span>
-            <button mat-button (click)="incrementCountInternal()"><mat-icon>favorite_border</mat-icon> {{ data.count }}</button>
-            <button mat-button>SHARE</button>
+            <mat-chip-list aria-label="Tags">
+                <!-- <b>Tags: </b> -->
+                <!-- <mat-chip *ngFor='let tag of data.tags'>{{ tag }}</mat-chip> -->
+                <span class="flex-spacer"></span>
+                <div>
+                    <button mat-button (click)="incrementCountInternal()"><mat-icon>favorite_border</mat-icon> {{ data.count }}</button>
+                    <button mat-button (click)="copyID()"><mat-icon>share</mat-icon></button>
+                </div>
+            </mat-chip-list>
         </mat-card-actions>
     </mat-card>
 </div>

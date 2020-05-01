@@ -65,6 +65,7 @@ export class CreateCdComponent implements OnInit {
     return flag;
   }
 
+  // TODO: Improve Function readability
   processForm(bool) {
     let temp1 = this.nameFormGroup.value;
     let temp2 = this.descriptionFormGroup.value;
@@ -84,7 +85,7 @@ export class CreateCdComponent implements OnInit {
     } else {
       if (this.validate(this.data)) {
         this.firebaseService.addItem(this.data);
-        console.log("Sucessfullt submitted");
+        console.log("Sucessfully submitted");
       }
       else {
         console.log("Validation failed");

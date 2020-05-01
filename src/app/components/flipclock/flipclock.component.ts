@@ -50,7 +50,7 @@ export class FlipclockComponent implements OnInit {
     // var aYearsWorth = (new Date().getTime() / 1000) + 31536000;
   }
 
-  makeUUID(length) {
+  makeUUID(length): string {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;

@@ -4,6 +4,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { FirebaseServiceService } from '../../services/firebase-service.service';
 import { Event } from '../../models/event';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-event-details',
@@ -11,11 +12,11 @@ import { Event } from '../../models/event';
   styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent implements OnInit {
-  event$;
+  event: Observable<Event>;
   constructor(private firebaseService: FirebaseServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.event$ = this.route.paramMap.pipe(
+    this.event = this.route.paramMap.pipe(
       switchMap(params => {
         const id = params.get('id');
         return this.firebaseService.afs.doc('countdowns/' + id).valueChanges();

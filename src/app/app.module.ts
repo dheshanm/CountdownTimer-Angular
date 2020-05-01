@@ -43,6 +43,7 @@ import { environment } from '../environments/environment.prod';
 import {FirebaseServiceService} from './services/firebase-service.service';
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { EventDetailsComponent } from './components/event-details/event-details.
     CreateCdComponent,
     EventsComponent,
     EventDetailsComponent,
+    ClickStopPropagationDirective,
   ],
   imports: [
     BrowserModule,
