@@ -41,6 +41,8 @@ import { environment } from '../environments/environment.prod';
 
 // Services
 import {FirebaseServiceService} from './services/firebase-service.service';
+import { EventsComponent } from './components/events/events.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import {FirebaseServiceService} from './services/firebase-service.service';
     Page404Component,
     HomeComponent,
     CreateCdComponent,
+    EventsComponent,
+    EventDetailsComponent,
   ],
   imports: [
     BrowserModule,
