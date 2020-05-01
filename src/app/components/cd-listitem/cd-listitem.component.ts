@@ -15,10 +15,43 @@ export class CdListitemComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  incrementCount(item: Event): void {
-    this.firebaseService.incrementCount(item);
-    console.log("Incrementing");
-    console.log(item);
+  incrementCountInternal(): void {
+    incrementCount(this.firebaseService, this.data);
   }
   
+}
+
+export function incrementCount(afs, data): void {
+  let id = 'init-card';
+  try {
+    id = document.getElementsByClassName('active')[0].id
+  }
+  catch {}
+  afs.incrementCount(data);
+  console.log("Incrementing");
+
+  // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
+  function handleElement(id): void {
+    let element = document.getElementById(id);
+    setTimeout(() => { element.classList.add('active'); }, 100);
+    console.log("Replace Sucessful");
+  }
+
+  // set up the mutation observer
+  var observer = new MutationObserver(function (mutation, me) {
+    // `mutations` is an array of mutations that occurred
+    // `me` is the MutationObserver instance
+    var element = document.getElementById(id);
+    if (element) {
+      handleElement(id);
+      me.disconnect(); // stop observing
+      return;
+    }
+  });
+
+  // start observing
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
 }

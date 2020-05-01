@@ -20,7 +20,7 @@ export class FlipclockComponent implements OnInit {
     let id = `flipdown-${this.uuid}`;
     let time_unix = this.time_unix;
 
-    console.log(this.time_unix);
+    // console.log(this.time_unix);
 
     // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
     function handleElement(id): void {

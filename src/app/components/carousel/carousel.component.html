@@ -1,10 +1,10 @@
 <div id="featured" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <ul class="carousel-item active">
+    <ul id="init-card" class="carousel-item active">
       <!-- <img src="..." class="d-block w-100" alt="..."> -->
       <app-featured-card [data]='init'></app-featured-card>
     </ul>
-    <ul  *ngFor='let item of data' class="carousel-item">
+    <ul  *ngFor='let item of data' class="carousel-item" id="{{ item.id }}">
       <app-featured-card [data]='item'></app-featured-card>
     </ul>  
   </div>

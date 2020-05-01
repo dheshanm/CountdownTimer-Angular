@@ -14,13 +14,55 @@ export class FeaturedCardComponent implements OnInit {
   constructor(private firebaseService: FirebaseServiceService) { }
 
   ngOnInit(): void {
-    console.log(this.data);
+    // console.log(this.data);
   }
 
-  incrementCount(item: Event): void {
-    this.firebaseService.incrementCount(item);
-    console.log("Incrementing");
-    console.log(item);
+  incrementCountInternal(): void {
+    incrementCount(this.firebaseService, this.data)
   }
 
+}
+
+export function incrementCount(afs, data): void {
+  afs.incrementCount(data);
+  console.log("Incrementing");
+
+  let id = data.id;
+  console.log(id)
+
+  function handleError(id){
+    let element = document.getElementById(id);
+    if (element.classList.contains("active")){
+      console.log("Replace Sucessful");
+    } else {
+      // console.log(element.classList);
+      setTimeout(() => { handleError(id); }, 100);
+      element.classList.add('active');
+    }
+  }
+
+  // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
+  function handleElement(id): void {
+    let element = document.getElementById(id);
+    setTimeout(() => { handleError(id); }, 100);
+    element.classList.add('active');
+  }
+
+  // set up the mutation observer
+  var observer = new MutationObserver(function (mutation, me) {
+    // `mutations` is an array of mutations that occurred
+    // `me` is the MutationObserver instance
+    var element = document.getElementById(id);
+    if (element) {
+      handleElement(id);
+      me.disconnect(); // stop observing
+      return;
+    }
+  });
+
+  // start observing
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
 }
