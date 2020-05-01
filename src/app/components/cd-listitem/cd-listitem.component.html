@@ -20,7 +20,7 @@
                     <!-- <b>Tags: </b> -->
                     <mat-chip *ngFor='let tag of data.tags'>{{ tag }}</mat-chip>
                     <span class="flex-spacer"></span>
-                    <mat-chip color="accent" (click)="incrementCountInternal()" selected><mat-icon>favorite_border</mat-icon></mat-chip>
+                    <button mat-button (click)="incrementCountInternal()"><mat-icon>favorite_border</mat-icon> {{ data.count }}</button>
                 </mat-chip-list>
             </p>
         </mat-card-content>

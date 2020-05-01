@@ -1,7 +1,13 @@
 <div class="container">
-    <h1>Top Countdowns</h1>
-    <ul  *ngFor='let item of data'>
-        <app-cd-listitem [data]='item'></app-cd-listitem>
-      </ul>
+
+  <h2>
+    <span>Top Countdowns</span>
+    <span class="flex-spacer"></span>
+    <button mat-button [routerLink]="'/events/create'"><mat-icon>plus_one</mat-icon></button>
+  </h2>
+
+  <ul  *ngFor='let item of data'>
+    <app-cd-listitem [data]='item'></app-cd-listitem>
+  </ul>
 </div>
 

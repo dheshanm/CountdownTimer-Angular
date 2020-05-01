@@ -10,7 +10,7 @@ import { Event } from '../../models/event';
   templateUrl: './create-cd.component.html',
   styleUrls: [
     './create-cd.component.scss',
-    '../bootstrap.css'
+    '../../../assets/css/bootstrap.css'
   ]
 })
 export class CreateCdComponent implements OnInit {
@@ -32,7 +32,7 @@ export class CreateCdComponent implements OnInit {
     this.descriptionFormGroup = this.fb.group({
       content: ['Sample Content'],
       tags: [''],
-      datetime: [''],
+      datetime: [(new Date().getTime() / 1000)],
     });
 
     this.data = {

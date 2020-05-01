@@ -3,14 +3,13 @@
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
-      <span routerLink=''>Countdown Timer</span>
+      <span (click)='goHome()' [routerLink]=''>Countdown Timer</span>
       <span class="flex-spacer"></span>
       <div fxShow="true" fxHide.lt-md="true">
-        <a mat-button [routerLink]="'/'"> Home </a>
         <a mat-button [routerLink]="'/account'"> My Account </a>
         <a mat-button [routerLink]="'/signup'"> Create Account </a>
-        <a mat-button [routerLink]="'/activities'"> Activities </a>
-        <a mat-button [routerLink]="'/create'"> Create Activity </a>
+        <a mat-button [routerLink]="'/events'"> Events </a>
+        <a mat-button [routerLink]="'/events/create'"> Create Event </a>
       </div>
     </mat-toolbar-row>
     <!-- <mat-toolbar-row>
@@ -22,10 +21,11 @@
   <mat-sidenav #sidenav>
     <mat-nav-list>
       <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+      <a mat-button [routerLink]="'/'"> Home </a>
       <a mat-button [routerLink]="'/account'"> My Account </a>
       <a mat-button [routerLink]="'/signup'"> Create Account </a>
-      <a mat-button [routerLink]="'/activities'"> Activities </a>
-      <a mat-button [routerLink]="'/create'"> Create Activity </a>
+      <a mat-button [routerLink]="'/events'"> Events </a>
+      <a mat-button [routerLink]="'/events/create'"> Create Event </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>

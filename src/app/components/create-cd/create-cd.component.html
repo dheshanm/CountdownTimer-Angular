@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Preview</h2>
+    <h2>Create a New Event</h2>
     <div class="center">
         <mat-card class="feature-card">
             <mat-card-header>
@@ -34,7 +34,8 @@
 
         <!-- Value[NAME]: {{ nameFormGroup.value | json }}
         Value: {{ descriptionFormGroup.value | json }} -->
-
+        <h4>Enter the Event Details</h4>
+        
         <mat-vertical-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="nameFormGroup">
                 <form [formGroup]="nameFormGroup">
@@ -47,8 +48,10 @@
                     <mat-label>Subtitle</mat-label>
                     <input matInput [formControlName]="'subtitle'" placeholder="Subtitle" required>
                 </mat-form-field><br>
-                    <mat-checkbox matInput [formControlName]="'isFeatured'">Add to Featured?</mat-checkbox>
+                    <mat-label>Add to Featured? </mat-label>
+                    <mat-checkbox matInput [formControlName]="'isFeatured'"></mat-checkbox>
                 <div>
+                    <br>
                     <button mat-button matStepperNext>Next</button>
                 </div>
                 </form>

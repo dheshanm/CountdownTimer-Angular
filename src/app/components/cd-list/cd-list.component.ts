@@ -6,7 +6,10 @@ import { Event } from '../../models/event';
 @Component({
   selector: 'app-cd-list',
   templateUrl: './cd-list.component.html',
-  styleUrls: ['./cd-list.component.scss']
+  styleUrls: [
+    './cd-list.component.scss',
+    '../../../assets/css/bootstrap.css'
+  ]
 })
 export class CdListComponent implements OnInit {
   data: Event[] = [];

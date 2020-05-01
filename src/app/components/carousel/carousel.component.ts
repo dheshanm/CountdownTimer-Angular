@@ -8,7 +8,7 @@ import { Event } from '../../models/event';
   templateUrl: './carousel.component.html',
   styleUrls: [
     './carousel.component.scss',
-    '../bootstrap.css'
+    '../../../assets/css/bootstrap.css'
   ]
 })
 export class CarouselComponent implements OnInit {
@@ -23,11 +23,12 @@ export class CarouselComponent implements OnInit {
     });
     
     this.init = {
-      title: 'Game of Thrones',
-      subtitle: 'HBO',
-      content: 'Nine noble families wage war against each other in order to gain control over the mythical land of Westeros. Meanwhile, a force is rising after millenniums and threatens the existence of living men.',
-      time_unix: 1600049541,
-      tags: ['HBO', 'GOT', 'TV Shows']
+      title: 'The Next Day',
+      subtitle: 'Preview Card',
+      content: 'This is a Preview card, with Dummy data. This is kept here to check if all things are loaded and displayed properly. This card will be removed when Development is complte and is Deployed.',
+      count: 12,
+      time_unix: (new Date().getTime() / 1000) + (60*60*24),
+      tags: ['Preview', '24 Hr Countdown', 'Dummy']
     }
   }
 

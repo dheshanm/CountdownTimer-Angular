@@ -40,7 +40,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment.prod';
 
 // Services
-import {FirebaseServiceService} from './services/firebase-service.service'
+import {FirebaseServiceService} from './services/firebase-service.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import {FirebaseServiceService} from './services/firebase-service.service'
     CdListitemComponent,
     Page404Component,
     HomeComponent,
-    CreateCdComponent
+    CreateCdComponent,
   ],
   imports: [
     BrowserModule,

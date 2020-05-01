@@ -17,7 +17,7 @@ export class FirebaseServiceService {
   countdownDoc: AngularFirestoreDocument<Event>;
 
   constructor(public afs:AngularFirestore) {
-    this.countdownCollection = this.afs.collection('countdowns', ref => ref.orderBy('title', 'asc'));
+    this.countdownCollection = this.afs.collection('countdowns', ref => ref.orderBy('count', 'desc'));
     this.featuredCollection  = this.afs.collection('countdowns', ref => ref.where("isFeatured", "==", true));
 
     this.countdowns = this.countdownCollection.snapshotChanges().pipe(
