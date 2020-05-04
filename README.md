@@ -1,6 +1,10 @@
 # Countdown Timer
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+
+![Screenshot](https://raw.githubusercontent.com/ScottKwang/CodeWithFriends-Spring2020/master/assets/images/banner_new.png)
+
+This project was made for submission to the CWF-Spring 2020.
+Check out CWF's [github page](https://scottkwang.github.io/CodeWithFriends-Spring2020/) to learn more!
 
 This project is a simple Angular implementation of a Catalogue of Countdowns, to anything. It allows you to create and track countdown to any Event or Activity and then view the countdown to the event in real-time.
 
