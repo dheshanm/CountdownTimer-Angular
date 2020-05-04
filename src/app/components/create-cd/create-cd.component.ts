@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { FirebaseServiceService } from '../../services/firebase-service.service'
 
 import { Event } from '../../models/event';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-create-cd',
@@ -15,12 +18,13 @@ import { Event } from '../../models/event';
 })
 export class CreateCdComponent implements OnInit {
   isLinear = false;
+  checked = false;
   nameFormGroup: FormGroup;
   descriptionFormGroup: FormGroup;
   
   data: Event;
 
-  constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService) { }
+  constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void { 
     this.nameFormGroup = this.fb.group({
@@ -50,7 +54,7 @@ export class CreateCdComponent implements OnInit {
     const separatedByComma: string[] = tags.split(',');
     
     // Check which delimiter has more Tags and use one with more Tags
-    return (seperatedBySpace.length << separatedByComma.length) ? separatedByComma : seperatedBySpace; 
+    return (seperatedBySpace.length < separatedByComma.length) ? separatedByComma : seperatedBySpace; 
   }
 
   validate(data: Event): boolean{
@@ -78,11 +82,48 @@ export class CreateCdComponent implements OnInit {
     }
 
     if(!toSubmit){
-      console.log(this.data);
     } else {
       if (this.validate(this.data)) {
-        this.firebaseService.addItem(this.data);
-        console.log("Sucessfully Submitted");
+        const id = this.firebaseService.addItem(this.data);
+        // Add UID to User model ONLY if logged in
+        if (this.auth.getUser()) {
+          let user: User;
+          id.then(id => {
+            this.auth.user$.subscribe(data => {
+              user = data;
+              // Check if User model has Events Instantiated
+              if (typeof(user.events) == "undefined") {
+                user.events = [];
+              }
+              // Prevent Recursive caliing of Push
+              if (!user.events.includes(id)){
+                user.events.push(id);
+                this.auth.updateUserData(user);
+              }
+            });
+            // Redirect to the Event's Page
+            this.router.navigate([`/events/${id}`]);
+          });
+        } 
+        // For Un Aunthenticated Users
+        else {
+          let user: User;
+          id.then(id => {
+            this.auth.guest$.subscribe(data => {
+              user = data;
+              if (typeof(user.events) == "undefined") {
+                user.events = [];
+              }
+              // Prevent Reccursive Callbacks
+              if (!user.events.includes(id)){
+                user.events.push(id);
+                this.auth.updateUserData(user);
+              };
+            });
+            // Redirect to the Event's Page
+            this.router.navigate([`/events/${id}`]);
+          });
+        }
       }
       else {
         console.log("Validation failed");

@@ -20,9 +20,9 @@ This project is deployed on Firebase and is hosted at <https://countdowntimer-an
 
 Some of the feature of this applications include
 
- 1. Material Style Cards to view countdowns.
- 2. Sharable links to countdowns, to facilitate better sharing of countdowns.
- 3. A like / favourite system to rank countdowns and display them in order of popularity.
+1.  Material Style Cards to view countdowns.
+2.  Sharable links to countdowns, to facilitate better sharing of countdowns.
+3.  A like / favourite system to rank countdowns and display them in order of popularity.
 
 ## Development server
 

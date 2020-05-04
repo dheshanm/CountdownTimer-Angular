@@ -47,8 +47,12 @@ export class FirebaseServiceService {
     return this.featuredCountdowns;
   }
 
-  addItem(item: Event): void {
-    this.countdownCollection.add(item)
+  addItem(item: Event): Promise<string> {
+    const post = async (item) => {
+      const doc_ref = await this.countdownCollection.add(item);
+      return doc_ref.id;
+    }
+    return post(item);
   }
 
   deleteItem(item: Event) {

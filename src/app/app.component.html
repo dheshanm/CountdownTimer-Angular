@@ -5,9 +5,9 @@
       </button>
       <span (click)='goHome()' [routerLink]=''>Countdown Timer</span>
       <span class="flex-spacer"></span>
-      <div fxShow="true" fxHide.lt-md="true">
-        <a mat-button [routerLink]="'/account'"> My Account </a>
-        <a mat-button [routerLink]="'/signup'"> Create Account </a>
+      <div *ngIf="auth.user$ | async as user; else login" fxShow="true" fxHide.lt-md="true">
+        <a mat-button [routerLink]="'/account'"> Hello, {{ user.displayName }} </a>
+        <a mat-button (click)="auth.signOut()"> Sign Out </a>
         <a mat-button [routerLink]="'/events'"> Events </a>
         <a mat-button [routerLink]="'/events/create'"> Create Event </a>
       </div>
@@ -19,11 +19,11 @@
 
 <mat-sidenav-container fxFlexFill>
   <mat-sidenav #sidenav>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="auth.user$ | async as user; else loginNav">
       <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
       <a mat-button [routerLink]="'/'"> Home </a>
-      <a mat-button [routerLink]="'/account'"> My Account </a>
-      <a mat-button [routerLink]="'/signup'"> Create Account </a>
+      <a mat-button [routerLink]="'/account'"> Hello, {{ user.displayName }} </a>
+      <a mat-button (click)="auth.signOut()"> Sign Out </a>
       <a mat-button [routerLink]="'/events'"> Events </a>
       <a mat-button [routerLink]="'/events/create'"> Create Event </a>
     </mat-nav-list>
@@ -35,3 +35,21 @@
         
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #login>
+  <div fxShow="true" fxHide.lt-md="true">
+    <a mat-button (click)="auth.googleSignin()"> Log In </a>
+    <a mat-button [routerLink]="'/events'"> Events </a>
+    <a mat-button [routerLink]="'/events/create'"> Create Event </a>
+  </div>
+</ng-template>
+
+<ng-template #loginNav>
+  <mat-nav-list>
+    <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+    <a mat-button [routerLink]="'/'"> Home </a>
+    <a mat-button (click)="auth.googleSignin()"> Log In </a>
+    <a mat-button [routerLink]="'/events'"> Events </a>
+    <a mat-button [routerLink]="'/events/create'"> Create Event </a>
+  </mat-nav-list>
+</ng-template>
