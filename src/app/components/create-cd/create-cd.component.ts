@@ -24,8 +24,8 @@ export class CreateCdComponent implements OnInit {
 
   ngOnInit(): void { 
     this.nameFormGroup = this.fb.group({
-      title: ['Title'],
-      subtitle: ['Subtitle'],
+      title: ['Preview Title'],
+      subtitle: ['Sample Subtitle'],
       isFeatured: ['false']
     });
 
@@ -36,8 +36,8 @@ export class CreateCdComponent implements OnInit {
     });
 
     this.data = {
-      title: "Title",
-      subtitle: "Subtitle",
+      title: "Preview Title",
+      subtitle: "Sample Subtitle",
       count: 1,
       content: "Sample Content",
       time_unix: (new Date().getTime() / 1000) + (60*60*24),
@@ -46,53 +46,50 @@ export class CreateCdComponent implements OnInit {
   }
 
   processTags(tags: string): string[] {
-    let out1: string[] = tags.split(' ');
-    let out2: string[] = tags.split('.');
+    const seperatedBySpace: string[] = tags.split(' ');
+    const separatedByComma: string[] = tags.split(',');
     
-    if (out1.length > out2.length){
-      return out1;
-    } else {
-      return out2;
-    }
+    // Check which delimiter has more Tags and use one with more Tags
+    return (seperatedBySpace.length << separatedByComma.length) ? separatedByComma : seperatedBySpace; 
   }
 
   validate(data: Event): boolean{
     let flag = true;
 
+    // Check if Required Fields are not empty.
     if (data.title == '' || data.subtitle == '' || data.time_unix == null) {
       flag = false;
     }
     return flag;
   }
 
-  // TODO: Improve Function readability
-  processForm(bool) {
-    let temp1 = this.nameFormGroup.value;
-    let temp2 = this.descriptionFormGroup.value;
+  processForm(toSubmit: Boolean) {
+    let nameForm = this.nameFormGroup.value;
+    let descriptionForm = this.descriptionFormGroup.value;
 
     this.data = {
-      title: temp1['title'],
-      subtitle: temp1['subtitle'],
-      isFeatured: temp1['isFeatured'],
+      title: nameForm['title'],
+      subtitle: nameForm['subtitle'],
+      isFeatured: nameForm['isFeatured'],
       count: 1,
-      content: temp2['content'],
-      time_unix: (new Date(temp2['datetime']).getTime() / 1000) + (60*60),
-      tags: this.processTags(temp2['tags'])
+      content: descriptionForm['content'],
+      time_unix: (new Date(descriptionForm['datetime']).getTime() / 1000) + (60*60),
+      tags: this.processTags(descriptionForm['tags'])
     }
 
-    if(!bool){
+    if(!toSubmit){
       console.log(this.data);
     } else {
       if (this.validate(this.data)) {
         this.firebaseService.addItem(this.data);
-        console.log("Sucessfully submitted");
+        console.log("Sucessfully Submitted");
       }
       else {
         console.log("Validation failed");
       }
     }
 
-    return temp2;
+    return descriptionForm;
   }
 
   onSubmit() {
