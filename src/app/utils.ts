@@ -58,7 +58,7 @@ export function incrementCount0(afs, data): void {
   function handleElement(id): void {
     let element = document.getElementById(id);
     setTimeout(() => { handleError(id); }, 100);
-    element.classList.add('active');
+    element.classList.add("active");
   }
 
   // set up the mutation observer
@@ -83,7 +83,7 @@ export function incrementCount0(afs, data): void {
 export function incrementCount(afs, data): void {
   let id = "init-card";
   try {
-    id = document.getElementsByClassName("active")[0].id
+    id = document.getElementsByClassName("active")[0].id;
   }
   catch {
     // continue regardless of error
