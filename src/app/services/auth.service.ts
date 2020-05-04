@@ -17,6 +17,7 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   user$: Observable<User>;
+  uid = null;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -26,12 +27,21 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
+          this.uid = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
       })
     );
+  }
+
+  getUser() {
+    if(this.uid == null) {
+      return null
+    } else {
+      return this.afs.doc<User>(`users/${this.uid}`);
+    }
   }
 
   async googleSignin() {
@@ -45,16 +55,21 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  private updateUserData(user) {
+  updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
-    const data = {
+    let data = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
     };
 
+    if(typeof(user.events) != "undefined"){
+      data["events"] = user.events;
+    }
+
+    console.log(data);
     return userRef.set(data, { merge: true });
   }
 
