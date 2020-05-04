@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project is a simple Angular implementation of a Catalogue of Countdowns, to anything. It allows you to create and track countdown to any Event or Activity and then view the countdown to the event in real-time.
 
+![countdown-landing-page](docs/assets/landing.png)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
