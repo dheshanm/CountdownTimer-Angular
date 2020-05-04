@@ -6,26 +6,20 @@ This project is a simple Angular implementation of a Catalogue of Countdowns, to
 
 ![countdown-landing-page](docs/assets/landing.png)
 
+## Deployment and Code Quality
+
+![Firebase Deployment](https://github.com/L4TTiCe/CountdownTimer-Angular/workflows/Firebase%20Deployment/badge.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e51b277890c24d2287036e8d6cf89eee)](https://www.codacy.com/manual/dheshan.mail/CountdownTimer-Angular?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=L4TTiCe/CountdownTimer-Angular&amp;utm_campaign=Badge_Grade)
+
+This project is deployed on Firebase and is hosted at https://countdowntimer-angular.web.app/. The source for the hosted application will be the master branch of this repository,
+
+## Features
+
+Some of the feature of this applications include
+
+1. Material Style Cards to view countdowns.
+2. Sharable links to countdowns, to facilitate better sharing of countdowns.
+3. A like / favourite system to rank countdowns and display them in order of popularity.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
