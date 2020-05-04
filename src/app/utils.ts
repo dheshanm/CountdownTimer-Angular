@@ -14,11 +14,11 @@ function fallbackCopyTextToClipboard(text) {
   textArea.select();
 
   try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Fallback: Copying text command was ' + msg);
+    var successful = document.execCommand("copy");
+    var msg = successful ? "successful" : "unsuccessful";
+    // console.log("Fallback: Copying text command was " + msg);
   } catch (err) {
-    console.error('Fallback: Oops, unable to copy', err);
+    // console.error("Fallback: Oops, unable to copy", err);
   }
 
   document.body.removeChild(textArea);
@@ -30,27 +30,27 @@ export function copyTextToClipboard(text) {
     return;
   }
   navigator.clipboard.writeText(text).then(function() {
-    console.log('Async: Copying to clipboard was successful!');
+    // console.log("Async: Copying to clipboard was successful!");
   }, function(err) {
-    console.error('Async: Could not copy text: ', err);
+    // console.error("Async: Could not copy text: ", err);
   });
 }
 
 export function incrementCount0(afs, data): void {
   afs.incrementCount(data);
-  console.log("Incrementing");
+  // console.log("Incrementing");
 
   let id = data.id;
-  console.log(id)
+  // console.log(id)
 
   function handleError(id){
     let element = document.getElementById(id);
     if (element.classList.contains("active")){
-      console.log("Replace Sucessful");
+      // console.log("Replace Sucessful");
     } else {
       // console.log(element.classList);
       setTimeout(() => { handleError(id); }, 100);
-      element.classList.add('active');
+      element.classList.add("active");
     }
   }
 
@@ -81,19 +81,21 @@ export function incrementCount0(afs, data): void {
 }
 
 export function incrementCount(afs, data): void {
-  let id = 'init-card';
+  let id = "init-card";
   try {
-    id = document.getElementsByClassName('active')[0].id
+    id = document.getElementsByClassName("active")[0].id
   }
-  catch {}
+  catch {
+    // continue regardless of error
+  }
   afs.incrementCount(data);
-  console.log("Incrementing");
+  // console.log("Incrementing");
 
   // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
   function handleElement(id): void {
     let element = document.getElementById(id);
-    setTimeout(() => { element.classList.add('active'); }, 100);
-    console.log("Replace Sucessful");
+    setTimeout(() => { element.classList.add("active"); }, 100);
+    // console.log("Replace Sucessful");
   }
 
   // set up the mutation observer
