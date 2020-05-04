@@ -17,6 +17,7 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   user$: Observable<User>;
+  guest$: Observable<User>;
   uid = null;
 
   constructor(
@@ -34,6 +35,7 @@ export class AuthService {
         }
       })
     );
+    this.guest$ = this.afs.doc<User>(`users/guest-user`).valueChanges();
   }
 
   getUser() {

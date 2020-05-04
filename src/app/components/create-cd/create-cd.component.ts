@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { FirebaseServiceService } from '../../services/firebase-service.service'
 
@@ -17,12 +18,13 @@ import { User } from '../../models/user.model';
 })
 export class CreateCdComponent implements OnInit {
   isLinear = false;
+  checked = false;
   nameFormGroup: FormGroup;
   descriptionFormGroup: FormGroup;
   
   data: Event;
 
-  constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void { 
     this.nameFormGroup = this.fb.group({
@@ -80,7 +82,6 @@ export class CreateCdComponent implements OnInit {
     }
 
     if(!toSubmit){
-      console.log(this.data);
     } else {
       if (this.validate(this.data)) {
         const id = this.firebaseService.addItem(this.data);
@@ -100,6 +101,27 @@ export class CreateCdComponent implements OnInit {
                 this.auth.updateUserData(user);
               }
             });
+            // Redirect to the Event's Page
+            this.router.navigate([`/events/${id}`]);
+          });
+        } 
+        // For Un Aunthenticated Users
+        else {
+          let user: User;
+          id.then(id => {
+            this.auth.guest$.subscribe(data => {
+              user = data;
+              if (typeof(user.events) == "undefined") {
+                user.events = [];
+              }
+              // Prevent Reccursive Callbacks
+              if (!user.events.includes(id)){
+                user.events.push(id);
+                this.auth.updateUserData(user);
+              };
+            });
+            // Redirect to the Event's Page
+            this.router.navigate([`/events/${id}`]);
           });
         }
       }
