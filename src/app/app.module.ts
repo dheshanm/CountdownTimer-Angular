@@ -1,15 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AvatarModule } from 'ngx-avatar';
-
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -25,6 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+// Project Components
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { FlipclockComponent } from './components/flipclock/flipclock.component';
 import { FeaturedCardComponent } from './components/featured-card/featured-card.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
@@ -33,6 +28,12 @@ import { CdListitemComponent } from './components/cd-listitem/cd-listitem.compon
 import { Page404Component } from './components/page404/page404.component';
 import { HomeComponent } from './components/home/home.component';
 import { CreateCdComponent } from './components/create-cd/create-cd.component';
+import { EventsComponent } from './components/events/events.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+
+// Third Party Components
+import { AvatarModule } from 'ngx-avatar';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 // Firebase and Firestore Imports
 import { AngularFireModule } from 'angularfire2';
@@ -44,8 +45,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Services
 import {FirebaseServiceService} from './services/firebase-service.service';
-import { EventsComponent } from './components/events/events.component';
-import { EventDetailsComponent } from './components/event-details/event-details.component';
+
+// Directives
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 
 @NgModule({
