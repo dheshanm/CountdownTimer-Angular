@@ -49,7 +49,7 @@
                     <input matInput [formControlName]="'subtitle'" placeholder="Subtitle" required>
                 </mat-form-field><br>
                     <mat-label>Add to Featured? </mat-label>
-                    <mat-checkbox matInput [(ngModel)]="checked" [formControlName]="'isFeatured'"></mat-checkbox>
+                    <mat-checkbox matInput [(ngModel)]="isFeaturedDefault" [formControlName]="'isFeatured'"></mat-checkbox>
                 <div>
                     <br>
                     <button mat-button matStepperNext>Next</button>

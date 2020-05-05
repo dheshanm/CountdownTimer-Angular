@@ -3,10 +3,12 @@ import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angul
 import { Router } from '@angular/router';
 
 import { FirebaseServiceService } from '../../services/firebase-service.service'
+import { AuthService } from 'src/app/services/auth.service';
 
 import { Event } from '../../models/event';
-import { AuthService } from 'src/app/services/auth.service';
 import { User } from '../../models/user.model';
+
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-cd',
@@ -18,7 +20,7 @@ import { User } from '../../models/user.model';
 })
 export class CreateCdComponent implements OnInit {
   isLinear = false;
-  checked = false;
+  isFeaturedDefault = false;
   nameFormGroup: FormGroup;
   descriptionFormGroup: FormGroup;
   
@@ -27,6 +29,8 @@ export class CreateCdComponent implements OnInit {
   constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void { 
+
+    // Initialize FormGroups with Default Values to be Displayed
     this.nameFormGroup = this.fb.group({
       title: ['Preview Title'],
       subtitle: ['Sample Subtitle'],
@@ -39,6 +43,7 @@ export class CreateCdComponent implements OnInit {
       datetime: [(new Date().getTime() / 1000)],
     });
 
+    // Placeholder data
     this.data = {
       title: "Preview Title",
       subtitle: "Sample Subtitle",
@@ -49,6 +54,7 @@ export class CreateCdComponent implements OnInit {
     }
   }
 
+  // Converts raw string to an Array or Tags
   processTags(tags: string): string[] {
     const seperatedBySpace: string[] = tags.split(' ');
     const separatedByComma: string[] = tags.split(',');
@@ -57,6 +63,7 @@ export class CreateCdComponent implements OnInit {
     return (seperatedBySpace.length < separatedByComma.length) ? separatedByComma : seperatedBySpace; 
   }
 
+  // Validate the contents of the form before submission to FS
   validate(data: Event): boolean{
     let flag = true;
 
@@ -71,6 +78,7 @@ export class CreateCdComponent implements OnInit {
     let nameForm = this.nameFormGroup.value;
     let descriptionForm = this.descriptionFormGroup.value;
 
+    // Destructure the FormGroup data
     this.data = {
       title: nameForm['title'],
       subtitle: nameForm['subtitle'],
@@ -81,47 +89,21 @@ export class CreateCdComponent implements OnInit {
       tags: this.processTags(descriptionForm['tags'])
     }
 
-    if(!toSubmit){
-    } else {
+    // DO NOT execute this if for preview only
+    // This part submits data to the FS Database
+    if(toSubmit){
       if (this.validate(this.data)) {
-        const id = this.firebaseService.addItem(this.data);
+        const id = this.firebaseService.addItemAsync(this.data);
         // Add UID to User model ONLY if logged in
         if (this.auth.getUser()) {
-          let user: User;
           id.then(id => {
-            this.auth.user$.subscribe(data => {
-              user = data;
-              // Check if User model has Events Instantiated
-              if (typeof(user.events) == "undefined") {
-                user.events = [];
-              }
-              // Prevent Recursive caliing of Push
-              if (!user.events.includes(id)){
-                user.events.push(id);
-                this.auth.updateUserData(user);
-              }
-            });
-            // Redirect to the Event's Page
-            this.router.navigate([`/events/${id}`]);
+            this.updateUser(this.auth.user$, id);
           });
         } 
         // For Un Aunthenticated Users
         else {
-          let user: User;
           id.then(id => {
-            this.auth.guest$.subscribe(data => {
-              user = data;
-              if (typeof(user.events) == "undefined") {
-                user.events = [];
-              }
-              // Prevent Reccursive Callbacks
-              if (!user.events.includes(id)){
-                user.events.push(id);
-                this.auth.updateUserData(user);
-              };
-            });
-            // Redirect to the Event's Page
-            this.router.navigate([`/events/${id}`]);
+            this.updateUser(this.auth.guest$, id);
           });
         }
       }
@@ -131,6 +113,25 @@ export class CreateCdComponent implements OnInit {
     }
 
     return descriptionForm;
+  }
+
+  // Append the EventID to the User model
+  updateUser(userObservable: Observable<User>, eventID: string) {
+    let user: User;
+    userObservable.subscribe(data => {
+      user = data;
+      // Check if User model has Events Instantiated
+      if (typeof(user.events) == "undefined") {
+        user.events = [];
+      }
+      // Prevent Recursive caliing of Push
+      if (!user.events.includes(eventID)){
+        user.events.push(eventID);
+        this.auth.updateUserData(user);
+      }
+    });
+    // Redirect to the Event's Page
+    this.router.navigate([`/events/${eventID}`]);
   }
 
   onSubmit() {

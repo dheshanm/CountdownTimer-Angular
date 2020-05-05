@@ -55,6 +55,11 @@ export class FirebaseServiceService {
     return post(item);
   }
 
+  async addItemAsync(item: Event): Promise<string> {
+    const doc_ref = await this.countdownCollection.add(item);
+    return doc_ref.id;
+  }
+
   deleteItem(item: Event) {
     this.countdownDoc = this.afs.doc(`countdowns/${item.id}`);
     this.countdownDoc.delete();
