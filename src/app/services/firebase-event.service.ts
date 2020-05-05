@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from 'angularfire2/firestore';
 
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Event } from '../models/event'
+import { Event } from '../models/event.model'
 
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -9,7 +13,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseServiceService {
+export class FirebaseEventService {
   countdownCollection: AngularFirestoreCollection<Event>;
   featuredCollection: AngularFirestoreCollection<Event>;
   countdowns: Observable<Event[]>;
@@ -53,6 +57,11 @@ export class FirebaseServiceService {
       return doc_ref.id;
     }
     return post(item);
+  }
+
+  async addItemAsync(item: Event): Promise<string> {
+    const doc_ref = await this.countdownCollection.add(item);
+    return doc_ref.id;
   }
 
   deleteItem(item: Event) {

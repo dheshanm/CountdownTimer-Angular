@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FirebaseServiceService } from "../../services/firebase-service.service";
 
-import { Event } from '../../models/event';
+import { FirebaseEventService } from "../../services/firebase-event.service";
+
+import { Event } from '../../models/event.model';
+
 import { incrementCount, copyID } from '../../utils'
 
 @Component({
@@ -13,7 +15,7 @@ export class FeaturedCardComponent implements OnInit {
   @Input() data: Event;
   _BASE_URL = "https://countdowntimer-angular.web.app/";
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private firebaseService: FirebaseEventService) { }
 
   ngOnInit(): void {
     // console.log(this.data);

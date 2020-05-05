@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { FirebaseServiceService } from "../../services/firebase-service.service"
-import { Event } from '../../models/event';
+import { FirebaseEventService } from "../../services/firebase-event.service"
+
+import { Event } from '../../models/event.model';
+
 import { incrementCount, copyID } from '../../utils'
 
 @Component({
@@ -12,15 +14,17 @@ import { incrementCount, copyID } from '../../utils'
 export class CdListitemComponent implements OnInit {
   @Input() data: Event;
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private eventService: FirebaseEventService) { }
 
   ngOnInit(): void { }
 
   incrementCountInternal(): void {
-    incrementCount(this.firebaseService, this.data);
+    incrementCount(this.eventService, this.data);
   }
 
+  // Wrapper function for copyID from utils
   copyID(): void {
+    // Call copyID from utils
     copyID(this.data.id);
   }
   

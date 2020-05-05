@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FirebaseServiceService } from '../../services/firebase-service.service';
-import { Event } from '../../models/event';
+import { FirebaseEventService } from '../../services/firebase-event.service';
+
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-cd-list',
@@ -14,10 +15,10 @@ import { Event } from '../../models/event';
 export class CdListComponent implements OnInit {
   data: Event[] = [];
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private eventService: FirebaseEventService) { }
 
   ngOnInit(): void {
-    this.firebaseService.getItems().subscribe(items => {
+    this.eventService.getItems().subscribe(items => {
       this.data = items;
     });
   }

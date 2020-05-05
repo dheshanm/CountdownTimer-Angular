@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FirebaseServiceService } from '../../services/firebase-service.service';
-import { Event } from '../../models/event';
+import { FirebaseEventService } from '../../services/firebase-event.service';
+
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-carousel',
@@ -12,17 +13,17 @@ import { Event } from '../../models/event';
   ]
 })
 export class CarouselComponent implements OnInit {
-  init: Event = {};
+  previewCard: Event = {};
   data: Event[] = [];
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private eventService: FirebaseEventService) { }
 
   ngOnInit(): void {
-    this.firebaseService.getFeaturedItems().subscribe(items => {
+    this.eventService.getFeaturedItems().subscribe(items => {
       this.data = items;
     });
     
-    this.init = {
+    this.previewCard = {
       title: 'The Next Day',
       subtitle: 'Preview Card',
       content: 'This is a Preview card, with Dummy data. This is kept here to check if all things are loaded and displayed properly. This card will be removed when Development is complte and is Deployed.',
