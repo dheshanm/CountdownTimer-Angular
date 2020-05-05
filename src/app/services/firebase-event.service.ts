@@ -13,7 +13,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseServiceService {
+export class FirebaseEventService {
   countdownCollection: AngularFirestoreCollection<Event>;
   featuredCollection: AngularFirestoreCollection<Event>;
   countdowns: Observable<Event[]>;

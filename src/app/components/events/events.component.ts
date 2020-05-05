@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FirebaseServiceService } from '../../services/firebase-service.service';
+import { FirebaseEventService } from '../../services/firebase-event.service';
 
 // import { Event } from '../../models/event.model';
 
@@ -15,10 +15,10 @@ import { FirebaseServiceService } from '../../services/firebase-service.service'
 export class EventsComponent implements OnInit {
   // data: Event[] = [];
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private eventService: FirebaseEventService) { }
 
   ngOnInit(): void {
-    // this.firebaseService.getItems().subscribe(items => {
+    // this.eventService.getItems().subscribe(items => {
     //   this.data = items;
     // });
   }

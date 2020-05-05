@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { FirebaseServiceService } from '../../services/firebase-service.service'
+import { FirebaseEventService } from '../../services/firebase-event.service'
 import { AuthService } from 'src/app/services/auth.service';
 
 import { Event } from '../../models/event.model';
@@ -26,7 +26,7 @@ export class CreateCdComponent implements OnInit {
   
   data: Event;
 
-  constructor(private fb: FormBuilder, private firebaseService: FirebaseServiceService, private auth: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private eventService: FirebaseEventService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void { 
 
@@ -93,7 +93,7 @@ export class CreateCdComponent implements OnInit {
     // This part submits data to the FS Database
     if(toSubmit){
       if (this.validate(this.data)) {
-        const id = this.firebaseService.addItemAsync(this.data);
+        const id = this.eventService.addItemAsync(this.data);
         // Add UID to User model ONLY if logged in
         if (this.auth.getUser()) {
           id.then(id => {

@@ -44,7 +44,7 @@ import { environment } from '../environments/environment.prod';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Services
-import {FirebaseServiceService} from './services/firebase-service.service';
+import { FirebaseEventService } from './services/firebase-event.service';
 
 // Directives
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
@@ -91,7 +91,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [FirebaseServiceService],
+  providers: [FirebaseEventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

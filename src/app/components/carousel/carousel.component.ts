@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FirebaseServiceService } from '../../services/firebase-service.service';
+import { FirebaseEventService } from '../../services/firebase-event.service';
 
 import { Event } from '../../models/event.model';
 
@@ -16,10 +16,10 @@ export class CarouselComponent implements OnInit {
   previewCard: Event = {};
   data: Event[] = [];
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private eventService: FirebaseEventService) { }
 
   ngOnInit(): void {
-    this.firebaseService.getFeaturedItems().subscribe(items => {
+    this.eventService.getFeaturedItems().subscribe(items => {
       this.data = items;
     });
     
