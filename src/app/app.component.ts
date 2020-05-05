@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -8,14 +8,8 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'countdown';
+  title = 'Countdown Timer';
 
-  constructor(
-    private router: Router,
-    public auth: AuthService
-    ) { }
+  constructor(public auth: AuthService) { }
 
-  goHome(): void {
-    this.router.navigate(['']);
-  }
 }

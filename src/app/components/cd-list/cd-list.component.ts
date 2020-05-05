@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FirebaseServiceService } from '../../services/firebase-service.service';
-import { Event } from '../../models/event';
+
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-cd-list',

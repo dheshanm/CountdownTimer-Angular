@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router'
 import { switchMap } from 'rxjs/operators';
 
 import { FirebaseServiceService } from '../../services/firebase-service.service';
-import { Event } from '../../models/event';
+
+import { Event } from '../../models/event.model';
+
 import { Observable } from 'rxjs';
 
 @Component({

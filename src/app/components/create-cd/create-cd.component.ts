@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FirebaseServiceService } from '../../services/firebase-service.service'
 import { AuthService } from 'src/app/services/auth.service';
 
-import { Event } from '../../models/event';
+import { Event } from '../../models/event.model';
 import { User } from '../../models/user.model';
 
 import { Observable } from 'rxjs';
@@ -74,7 +74,7 @@ export class CreateCdComponent implements OnInit {
     return flag;
   }
 
-  processForm(toSubmit: Boolean) {
+  processForm(toSubmit: Boolean): void {
     let nameForm = this.nameFormGroup.value;
     let descriptionForm = this.descriptionFormGroup.value;
 
@@ -111,8 +111,6 @@ export class CreateCdComponent implements OnInit {
         console.log("Validation failed");
       }
     }
-
-    return descriptionForm;
   }
 
   // Append the EventID to the User model
@@ -134,10 +132,12 @@ export class CreateCdComponent implements OnInit {
     this.router.navigate([`/events/${eventID}`]);
   }
 
+  // Submits the data to DB and redirects to Ecent Details page
   onSubmit() {
     this.processForm(true);
   }
 
+  // Updates only the Displayed Preview Card
   onPreview() {
     this.processForm(false);
   }

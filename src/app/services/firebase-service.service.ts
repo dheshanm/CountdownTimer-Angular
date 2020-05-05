@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from 'angularfire2/firestore';
 
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Event } from '../models/event'
+import { Event } from '../models/event.model'
 
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';

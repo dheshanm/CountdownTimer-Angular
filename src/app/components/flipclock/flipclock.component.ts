@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+
 import FlipDown from '../../../assets/js/flipdown_modified.js';
 
 @Component({
