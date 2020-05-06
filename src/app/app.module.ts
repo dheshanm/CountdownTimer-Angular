@@ -20,7 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 // Project Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FlipclockComponent } from './components/flipclock/flipclock.component';
+import { FlipDownComponent } from './components/flipdown/flipdown.component';
 import { FeaturedCardComponent } from './components/featured-card/featured-card.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CdListComponent } from './components/cd-list/cd-list.component';
@@ -37,11 +37,11 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 // Firebase and Firestore Imports
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
 import { environment } from '../environments/environment.prod';
 
 // for AngularFireAuth
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 // Services
 import { FirebaseEventService } from './services/firebase-event.service';
@@ -52,7 +52,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
 @NgModule({
   declarations: [
     AppComponent,
-    FlipclockComponent,
+    FlipDownComponent,
     FeaturedCardComponent,
     CarouselComponent,
     CdListComponent,
@@ -91,7 +91,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [FirebaseEventService],
+  providers: [FirebaseEventService, AngularFirestore, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

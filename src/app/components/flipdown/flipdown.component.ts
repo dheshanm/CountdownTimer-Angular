@@ -5,15 +5,15 @@ import { waitForElemTrigger } from '../../utils';
 import FlipDown from '../../../assets/js/flipdown_modified.js';
 
 @Component({
-  selector: 'app-flipclock',
-  templateUrl: './flipclock.component.html',
+  selector: 'app-flipdown',
+  templateUrl: './flipdown.component.html',
   styleUrls: [
-    './flipclock.component.scss'],
+    './flipdown.component.scss'],
   // Disable encapsulation to apply style in ./flipclock.component.scss to
   // to dynamically generated components (i.e. flipdown) 
   encapsulation: ViewEncapsulation.None
 })
-export class FlipclockComponent implements OnInit, OnChanges {
+export class FlipDownComponent implements OnInit, OnChanges {
   @Input() time_unix: number;
   uuid: string;
 
