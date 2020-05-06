@@ -2,13 +2,15 @@ import { Component, OnInit, ViewEncapsulation, Input, OnChanges, SimpleChanges }
 
 import { waitForElemTrigger } from '../../utils';
 
-import FlipDown from '../../../assets/js/flipdown_modified.js';
+import FlipDown from '../../../assets/flipdown/src/flipdown.js';
 
 @Component({
   selector: 'app-flipdown',
   templateUrl: './flipdown.component.html',
   styleUrls: [
-    './flipdown.component.scss'],
+    './flipdown.component.scss',
+    '../../../assets/flipdown/src/flipdown.css'
+  ],
   // Disable encapsulation to apply style in ./flipclock.component.scss to
   // to dynamically generated components (i.e. flipdown) 
   encapsulation: ViewEncapsulation.None

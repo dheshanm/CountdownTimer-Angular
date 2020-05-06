@@ -11,8 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkingout latest commits from repo
+    - name: Checkingout from repo
       uses: actions/checkout@master
+      with:
+        submodules: 'true'
       
     - name: Setting up Node v10.x 
       uses: actions/setup-node@master
