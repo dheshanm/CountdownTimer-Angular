@@ -1,0 +1,3 @@
+[submodule "src/assets/flipdown"]
+	path = src/assets/flipdown
+	url = git@github.com:L4TTiCe/flipdown.git
