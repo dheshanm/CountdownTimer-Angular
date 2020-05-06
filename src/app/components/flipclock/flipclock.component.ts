@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input, OnChanges, SimpleChanges } from '@angular/core';
 
+import { waitForElemTrigger } from '../../utils';
+
 import FlipDown from '../../../assets/js/flipdown_modified.js';
 
 @Component({
@@ -7,6 +9,8 @@ import FlipDown from '../../../assets/js/flipdown_modified.js';
   templateUrl: './flipclock.component.html',
   styleUrls: [
     './flipclock.component.scss'],
+  // Disable encapsulation to apply style in ./flipclock.component.scss to
+  // to dynamically generated components (i.e. flipdown) 
   encapsulation: ViewEncapsulation.None
 })
 export class FlipclockComponent implements OnInit, OnChanges {
@@ -14,7 +18,7 @@ export class FlipclockComponent implements OnInit, OnChanges {
   uuid: string;
 
   constructor() {
-    this.uuid = this.makeUUID(5);
+    this.uuid = `flipclock-${this.makeUUID(5)}`;
   }
 
   ngOnInit(): void {
@@ -22,15 +26,14 @@ export class FlipclockComponent implements OnInit, OnChanges {
     this.createTimer(this.uuid, this.time_unix);
   }
 
+  // Updates the time displayed in 'flipdown'
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
     let time_unix: number;
 
+    // Prevent triggering updation on Instatiation of element
     if (changes.time_unix.previousValue != undefined) {
-      console.log("flag")
       time_unix = changes.time_unix.currentValue;
 
-      // TODO
       // Delete existing 'flipdown' element
       this.removeTimer(this.uuid);
       // Create new 'flipdown' with updated 'time_unix'
@@ -38,6 +41,7 @@ export class FlipclockComponent implements OnInit, OnChanges {
     }
   }
 
+  // Removes the element with the ID passed as parameter
   removeTimer(id: string) {
     const clock = document.getElementById(id);
     clock.parentNode.removeChild(clock);
@@ -45,56 +49,34 @@ export class FlipclockComponent implements OnInit, OnChanges {
 
   // Dynamically creates and injects 'flipdown' element
   createTimer(id: string, time_unix: number) {
-    const mainDiv = document.getElementById("countdown");
-    var newClock = document.createElement("div"); 
+    waitForElemTrigger(`countdown-${ this.uuid }`, (elemID) => {
+      const mainDiv = document.getElementById(`countdown-${ this.uuid }`);
+      var newClock = document.createElement("div"); 
 
-    const clockStyle = {
-      margin: "2em",
-    }
-
-    // add 'flipclock' class to classList
-    newClock.classList.add("flipdown");
-    // Apply style
-    for (let style in clockStyle) {
-      newClock.style[style] = clockStyle[style];
-    }
-    // Set ID for new Clock
-    newClock.id = id;
-
-    // append newClock to mainDiv
-    mainDiv.appendChild(newClock);
-
-    console.log(newClock)
-    console.log(mainDiv)
-
-    // console.log(this.time_unix);
-
-    // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
-    function handleElement(id): void {
-      let element = document.getElementById(id);
-      
-      const cd = new FlipDown(time_unix, id).start();
-    }
-
-    // set up the mutation observer
-    var observer = new MutationObserver(function (mutation, me) {
-      // `mutations` is an array of mutations that occurred
-      // `me` is the MutationObserver instance
-      var element = document.getElementById(id);
-      if (element) {
-        handleElement(id);
-        me.disconnect(); // stop observing
-        return;
+      // Style attributes of the generated element
+      const clockStyle = {
+        margin: "2em",
       }
-    });
 
-    // start observing
-    observer.observe(document, {
-      childList: true,
-      subtree: true
+      // add required classes to classList
+      newClock.classList.add("flipdown");
+      // Apply style
+      for (let style in clockStyle) {
+        newClock.style[style] = clockStyle[style];
+      }
+      // Set ID for newClock
+      newClock.id = id;
+
+      // append newClock to mainDiv
+      mainDiv.appendChild(newClock);
+
+      waitForElemTrigger(id, (clockID)=> {
+        new FlipDown(time_unix, id).start();
+      });
     });
   }
 
+  // Generate a random string of specified length
   makeUUID(length): string {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
