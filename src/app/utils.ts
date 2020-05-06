@@ -36,6 +36,28 @@ export function copyTextToClipboard(text): void {
   });
 }
 
+// Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
+export function waitForElemTrigger(elemID: string, handlerFunction): void{
+
+  // set up the mutation observer
+  var observer = new MutationObserver(function (mutation, me) {
+    // `mutations` is an array of mutations that occurred
+    // `me` is the MutationObserver instance
+    var element = document.getElementById(elemID);
+    if (element) {
+      handlerFunction(elemID);
+      me.disconnect(); // stop observing
+      return;
+    }
+  });
+
+  // start observing
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
+}
+
 export function incrementCount0(afs, data): void {
   afs.incrementCount(data);
   // console.log("Incrementing");
@@ -91,35 +113,13 @@ export function incrementCount(afs, data): void {
   afs.incrementCount(data);
   // console.log("Incrementing");
 
-  waitForElemTrigger(id, (elemID)=> {
+  waitForElemTrigger(id, (elemID) => {
     let element = document.getElementById(elemID);
     setTimeout(() => { element.classList.add("active"); }, 100);
-  })
+  });
 }
 
 export function copyID(id:string): void {
   _BASE_URL = window.location.origin;
   copyTextToClipboard(_BASE_URL + "/events/" + id);
-}
-
-// Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
-export function waitForElemTrigger(elemID: string, handlerFunction): void{
-
-  // set up the mutation observer
-  var observer = new MutationObserver(function (mutation, me) {
-    // `mutations` is an array of mutations that occurred
-    // `me` is the MutationObserver instance
-    var element = document.getElementById(elemID);
-    if (element) {
-      handlerFunction(elemID);
-      me.disconnect(); // stop observing
-      return;
-    }
-  });
-
-  // start observing
-  observer.observe(document, {
-    childList: true,
-    subtree: true
-  });
 }
