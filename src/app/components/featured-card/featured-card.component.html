@@ -7,7 +7,7 @@
             <mat-card-subtitle *ngIf='data.subtitle'>{{ data.subtitle }}</mat-card-subtitle>
         </mat-card-header>
         <div class="center">
-            <app-flipclock [time_unix]='data.time_unix'></app-flipclock>
+            <app-flipdown [time_unix]='data.time_unix'></app-flipdown>
         </div>
         <mat-card-content *ngIf='data.content'>
             <p>{{ data.content }}</p>

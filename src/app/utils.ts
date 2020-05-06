@@ -24,7 +24,7 @@ function fallbackCopyTextToClipboard(text) {
   document.body.removeChild(textArea);
 }
 
-export function copyTextToClipboard(text) {
+export function copyTextToClipboard(text): void {
   if (!navigator.clipboard) {
     fallbackCopyTextToClipboard(text);
     return;
@@ -33,6 +33,28 @@ export function copyTextToClipboard(text) {
     // console.log("Async: Copying to clipboard was successful!");
   }, function(err) {
     // console.error("Async: Could not copy text: ", err);
+  });
+}
+
+// Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
+export function waitForElemTrigger(elemID: string, handlerFunction): void{
+
+  // set up the mutation observer
+  var observer = new MutationObserver(function (mutation, me) {
+    // `mutations` is an array of mutations that occurred
+    // `me` is the MutationObserver instance
+    var element = document.getElementById(elemID);
+    if (element) {
+      handlerFunction(elemID);
+      me.disconnect(); // stop observing
+      return;
+    }
+  });
+
+  // start observing
+  observer.observe(document, {
+    childList: true,
+    subtree: true
   });
 }
 
@@ -91,33 +113,13 @@ export function incrementCount(afs, data): void {
   afs.incrementCount(data);
   // console.log("Incrementing");
 
-  // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
-  function handleElement(id): void {
-    let element = document.getElementById(id);
+  waitForElemTrigger(id, (elemID) => {
+    let element = document.getElementById(elemID);
     setTimeout(() => { element.classList.add("active"); }, 100);
-    // console.log("Replace Sucessful");
-  }
-
-  // set up the mutation observer
-  var observer = new MutationObserver(function (mutation, me) {
-    // `mutations` is an array of mutations that occurred
-    // `me` is the MutationObserver instance
-    var element = document.getElementById(id);
-    if (element) {
-      handleElement(id);
-      me.disconnect(); // stop observing
-      return;
-    }
-  });
-
-  // start observing
-  observer.observe(document, {
-    childList: true,
-    subtree: true
   });
 }
 
-export function copyID(id:string) {
+export function copyID(id:string): void {
   _BASE_URL = window.location.origin;
   copyTextToClipboard(_BASE_URL + "/events/" + id);
 }
