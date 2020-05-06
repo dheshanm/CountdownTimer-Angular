@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import FlipDown from '../../../assets/js/flipdown_modified.js';
 
@@ -9,7 +9,7 @@ import FlipDown from '../../../assets/js/flipdown_modified.js';
     './flipclock.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FlipclockComponent implements OnInit {
+export class FlipclockComponent implements OnInit, OnChanges {
   @Input() time_unix: number;
   uuid: string;
 
@@ -18,14 +18,51 @@ export class FlipclockComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = `flipdown-${this.uuid}`;
-    let time_unix = this.time_unix;
+    // var aYearsWorth = (new Date().getTime() / 1000) + 31536000;
+    this.createTimer(this.uuid, this.time_unix);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+    let time_unix: number;
+
+    if (changes.time_unix.previousValue != undefined) {
+      console.log("flag")
+      time_unix = changes.time_unix.currentValue;
+
+      // TODO
+    }
+  }
+
+  createTimer(id: string, time_unix: number) {
+    const mainDiv = document.getElementById("countdown");
+    var newClock = document.createElement("div"); 
+
+    const clockStyle = {
+      margin: "2em",
+    }
+
+    // add 'flipclock' class to classList
+    newClock.classList.add("flipdown");
+    // Apply style
+    for (let style in clockStyle) {
+      newClock.style[style] = clockStyle[style];
+    }
+    // Set ID for new Clock
+    newClock.id = id;
+
+    // append newClock to mainDiv
+    mainDiv.appendChild(newClock);
+
+    console.log(newClock)
+    console.log(mainDiv)
 
     // console.log(this.time_unix);
 
     // Reference : https://stackoverflow.com/questions/16149431/make-function-wait-until-element-exists
     function handleElement(id): void {
       let element = document.getElementById(id);
+      
       const cd = new FlipDown(time_unix, id).start();
     }
 
@@ -46,9 +83,6 @@ export class FlipclockComponent implements OnInit {
       childList: true,
       subtree: true
     });
-
-
-    // var aYearsWorth = (new Date().getTime() / 1000) + 31536000;
   }
 
   makeUUID(length): string {
