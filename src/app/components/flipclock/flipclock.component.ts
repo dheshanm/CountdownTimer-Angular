@@ -31,9 +31,19 @@ export class FlipclockComponent implements OnInit, OnChanges {
       time_unix = changes.time_unix.currentValue;
 
       // TODO
+      // Delete existing 'flipdown' element
+      this.removeTimer(this.uuid);
+      // Create new 'flipdown' with updated 'time_unix'
+      this.createTimer(this.uuid, time_unix);
     }
   }
 
+  removeTimer(id: string) {
+    const clock = document.getElementById(id);
+    clock.parentNode.removeChild(clock);
+  }
+
+  // Dynamically creates and injects 'flipdown' element
   createTimer(id: string, time_unix: number) {
     const mainDiv = document.getElementById("countdown");
     var newClock = document.createElement("div"); 
