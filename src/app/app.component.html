@@ -3,7 +3,7 @@
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
-      <span [routerLink]="'/'">{{title}}</span>
+      <span class="logo" [routerLink]="'/'">{{title}}</span>
       <span class="flex-spacer"></span>
       <div *ngIf="auth.user$ | async as user; else navBarNoAuth" fxShow="true" fxHide.lt-md="true">
         <a mat-button [routerLink]="'/account'"> Hello, {{ user.displayName }} </a>

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AngularFirestore } from 'angularfire2/firestore';
+
 import { CdListComponent } from './cd-list.component';
+import { angularFirestoreStub } from '../../test/angularfirestore.stub';
 
 describe('CdListComponent', () => {
   let component: CdListComponent;
@@ -8,7 +11,10 @@ describe('CdListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CdListComponent ]
+      declarations: [ CdListComponent ],
+      providers: [
+        {provide: AngularFirestore, useValue: angularFirestoreStub},
+      ],
     })
     .compileComponents();
   }));
