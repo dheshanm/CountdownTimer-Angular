@@ -1,6 +1,12 @@
 import { testUser } from './user.stub'
 import { Event } from '../models/event.model';
-import { from, of } from 'rxjs';
+import { 
+  DocumentChangeAction,
+  DocumentChange,
+  DocumentSnapshot,
+  // DocumentReference
+} from 'angularfire2/firestore';
+import { from } from 'rxjs';
 
 const eventData: Event[][] = [[
   { 
@@ -15,42 +21,47 @@ const eventData: Event[][] = [[
   },
 ]];
 
-const snapshotData =
-{
-  type: "added",
-  payload: {
-    type:"added",
-    doc: {
-      id: "XK4wkRLcvB3Ts9D77k3m",
-      ref: {
-        id: "XK4wkRLcvB3Ts9D77k3m",
-        parent: {
-          id: "countdowns",
-          parent: null,
-          path: "countdowns",
-        },
-        path: "countdowns/XK4wkRLcvB3Ts9D77k3m",
-        data: () => (
-          {
-            title: 'GOT S08E08',
-            subtitle: 'HBO Entertainment',
-            isFeatured: true,
-            count: 12,
-            content: 'A Royal Drama',
-            time_unix: 1590694213,
-            tags: ['test', 'HBO']
-          }
-        ),
-      },
-      exists: true,
-    },
-    oldIndex: -1,
-    newIndex: 0,
-  }
+// const docRefStub: DocumentReference = {
+//   id: "XK4wkRLcvB3Ts9D77k3m",
+//   parent: null,
+//   path: "countdowns/XK4wkRLcvB3Ts9D77k3m",
+// }
+
+const snapshotDocStub: DocumentSnapshot<Event> = {
+  id: "XK4wkRLcvB3Ts9D77k3m",
+  ref: null,
+  metadata: null,
+  exists: true,
+  data: (): Event => (
+    {
+      title: 'GOT S08E08',
+      subtitle: 'HBO Entertainment',
+      isFeatured: true,
+      count: 12,
+      content: 'A Royal Drama',
+      time_unix: 1590694213,
+      tags: ['test', 'HBO']
+    }
+  ),
+  get: null,
+  isEqual: null
+};
+
+const payloadStub: DocumentChange<Event> = {
+  type:"added",
+  doc: snapshotDocStub,
+  oldIndex: -1,
+  newIndex: 0,
 }
 
+const snapshotData: DocumentChangeAction<Event>[] =[
+{
+  type: "added",
+  payload: payloadStub
+}];
+
 const data = from(eventData);
-const snapData = of([snapshotData])
+const snapData = from([snapshotData])
 
 
 const collectionStub = {

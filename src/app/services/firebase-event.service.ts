@@ -8,7 +8,7 @@ import {
 import { Event } from '../models/event.model'
 
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,19 +25,19 @@ export class FirebaseEventService {
     this.featuredCollection  = this.afs.collection('countdowns', ref => ref.where("isFeatured", "==", true));
 
     this.countdowns = this.countdownCollection.snapshotChanges().pipe(
-      map(changes => {
-      return changes.map( a => {
-        const data = a.payload.doc.data() as Event;
-        data.id = a.payload.doc.id;
+      map((changes): Event[] => {
+      return changes.map( (docChanges): Event => {
+        const data = docChanges.payload.doc.data() as Event;
+        data.id = docChanges.payload.doc.id;
         return data;
       });
     }));
 
     this.featuredCountdowns = this.featuredCollection.snapshotChanges().pipe(
-      map(changes => {
-      return changes.map( a => {
-        const data = a.payload.doc.data() as Event;
-        data.id = a.payload.doc.id;
+      map((changes): Event[] => {
+      return changes.map( (docChanges): Event => {
+        const data = docChanges.payload.doc.data() as Event;
+        data.id = docChanges.payload.doc.id;
         return data;
       });
     }));
@@ -47,7 +47,7 @@ export class FirebaseEventService {
     return this.countdowns;
   }
 
-  getFeaturedItems() {
+  getFeaturedItems(): Observable<Event[]> {
     return this.featuredCountdowns;
   }
 
@@ -64,17 +64,17 @@ export class FirebaseEventService {
     return doc_ref.id;
   }
 
-  deleteItem(item: Event) {
+  deleteItem(item: Event): void {
     this.countdownDoc = this.afs.doc(`countdowns/${item.id}`);
     this.countdownDoc.delete();
   }
 
-  updateItem(item: Event) {
+  updateItem(item: Event): void {
     this.countdownDoc = this.afs.doc(`countdowns/${item.id}`);
     this.countdownDoc.update(item);
   }
 
-  incrementCount(item: Event) {
+  incrementCount(item: Event): void {
     this.countdownDoc = this.afs.doc(`countdowns/${item.id}`);
     item.count = item.count + 1;
     this.countdownDoc.update(item);
