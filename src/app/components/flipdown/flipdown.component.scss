@@ -1,1 +1,11 @@
 
+.after-end {
+  zoom: 2;
+  padding: 0.5em;
+}
+
+@media (max-width: 950px) {
+  .after-end {
+    zoom: 1.25;
+  }
+}

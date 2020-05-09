@@ -20,7 +20,7 @@ export class FlipDownComponent implements OnInit, OnChanges {
   uuid: string;
 
   constructor() {
-    this.uuid = `flipclock-${this.makeUUID(5)}`;
+    this.generateUUID();
   }
 
   ngOnInit(): void {
@@ -49,6 +49,30 @@ export class FlipDownComponent implements OnInit, OnChanges {
     clock.parentNode.removeChild(clock);
   }
 
+  addDate(id: string, time_unix: number) {
+    const mainDiv = document.getElementById(`countdown-${ this.uuid }`);
+    var date = document.createElement("div"); 
+
+    let dateString = new Date(time_unix * 1000).toLocaleString();
+
+    date.innerHTML = `The Event was scheduled to start at ${ dateString } (${Intl.DateTimeFormat().resolvedOptions().timeZone})`
+
+    // Set ID for newClock
+    date.id = id;
+
+    // add required classes to classList
+    date.classList.add("after-end");
+
+    // append newClock to mainDiv
+    mainDiv.appendChild(date);
+  }
+
+  // Callback Function to call after the timer runs out
+  afterEnding(id: string, time_unix: number) {
+    this.removeTimer(id);
+    this.addDate(id, time_unix);
+  }
+
   // Dynamically creates and injects 'flipdown' element
   createTimer(id: string, time_unix: number) {
     waitForElemTrigger(`countdown-${ this.uuid }`, (elemID) => {
@@ -72,10 +96,19 @@ export class FlipDownComponent implements OnInit, OnChanges {
       // append newClock to mainDiv
       mainDiv.appendChild(newClock);
 
-      waitForElemTrigger(id, (clockID)=> {
-        new FlipDown(time_unix, id).start();
+      new FlipDown(time_unix, id)
+      // Start Countdown
+      .start()
+      // After it ends
+      .ifEnded(() => {
+        this.afterEnding(id, time_unix);
       });
+
     });
+  }
+
+  generateUUID(): void {
+    this.uuid = this.makeUUID(5);
   }
 
   // Generate a random string of specified length
