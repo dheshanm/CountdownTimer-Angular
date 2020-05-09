@@ -4,13 +4,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 
 import { CarouselComponent } from './carousel.component';
 import { angularFirestoreStub } from '../../test/angularfirestore.stub';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 
 describe('CarouselComponent', () => {
   let component: CarouselComponent;
   let fixture: ComponentFixture<CarouselComponent>;
-  let de: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
