@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AngularFirestore } from 'angularfire2/firestore';
+// import { AngularFirestore } from 'angularfire2/firestore';
 
 import { EventsComponent } from './events.component';
-import { angularFirestoreStub } from '../../test/angularfirestore.stub';
+// import { angularFirestoreStub } from '../../test/angularfirestore.stub';
 
 describe('EventsComponent', () => {
   let component: EventsComponent;
@@ -13,7 +13,7 @@ describe('EventsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ EventsComponent ],
       providers: [
-        {provide: AngularFirestore, useValue: angularFirestoreStub},
+        // {provide: AngularFirestore, useValue: angularFirestoreStub},
       ],
     })
     .compileComponents();
@@ -25,7 +25,7 @@ describe('EventsComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

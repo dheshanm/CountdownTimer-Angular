@@ -45,6 +45,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 // Services
 import { FirebaseEventService } from './services/firebase-event.service';
+import { AuthService } from './services/auth.service';
 
 // Directives
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
@@ -89,9 +90,9 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     OwlNativeDateTimeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'countdowntimer-angular'),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
-  providers: [FirebaseEventService, AngularFirestore, AngularFireAuth],
+  providers: [AuthService, FirebaseEventService, AngularFirestore, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
