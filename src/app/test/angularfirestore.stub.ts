@@ -55,7 +55,6 @@ const snapshotData: DocumentChangeAction<Event>[] =[
 const data = from(eventData);
 const snapData = from([snapshotData])
 
-
 const collectionStub = {
   valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data),
   snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(snapData)
