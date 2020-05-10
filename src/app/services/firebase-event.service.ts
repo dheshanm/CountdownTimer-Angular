@@ -51,6 +51,11 @@ export class FirebaseEventService {
     return this.featuredCountdowns;
   }
 
+  async getItemByID(id: string): Promise<Event> {
+    let doc = await this.afs.doc(`countdowns/${id}`).get().toPromise();
+    return doc.data() as Event;
+  }
+
   addItem(item: Event): Promise<string> {
     const post = async (item) => {
       const doc_ref = await this.countdownCollection.add(item);

@@ -4,6 +4,7 @@ import { FirebaseEventService } from '../../services/firebase-event.service'
 import { AuthService } from 'src/app/services/auth.service';
 
 import { User } from '../../models/user.model';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,6 +13,7 @@ import { User } from '../../models/user.model';
 })
 export class UserDashboardComponent implements OnInit {
   userData: User;
+  userEvents: Event[];
 
   constructor(private eventService: FirebaseEventService, private auth: AuthService) { }
 
@@ -23,9 +25,18 @@ export class UserDashboardComponent implements OnInit {
       photoURL: '',
       uid: 'Loading...'
     };
+    this.userEvents = [];
 
   this.auth.user$.subscribe(data => {
     this.userData = data;
+    for( let eventID of data.events ){
+      this.eventService.getItemByID(eventID).then(event => {
+        if (event != undefined) {
+          this.userEvents.push(event);
+          console.log(event);
+        }
+      });
+    }
   });
   }
 
