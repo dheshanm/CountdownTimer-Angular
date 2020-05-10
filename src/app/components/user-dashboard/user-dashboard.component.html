@@ -26,3 +26,13 @@
         </mat-card-actions>
     </mat-card>
 </div>
+
+<div class="container">
+  <h2>
+    <span>My Countdowns</span>
+    <span class="flex-spacer"></span>
+    <button mat-button [routerLink]="'/events/create'"><mat-icon>plus_one</mat-icon></button>
+  </h2>
+  
+  <app-cd-list [usePassedData]='true' [passedData]='userEvents' ></app-cd-list>
+</div>

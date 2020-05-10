@@ -9,7 +9,10 @@ import { Event } from '../../models/event.model';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
+  styleUrls: [
+    './user-dashboard.component.scss',
+    '../../../assets/css/bootstrap.css'
+  ]
 })
 export class UserDashboardComponent implements OnInit {
   userData: User;
