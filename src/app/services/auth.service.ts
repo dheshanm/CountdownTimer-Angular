@@ -23,7 +23,7 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+    public afs: AngularFirestore,
     private router: Router
   ) {
     this.user$ = this.afAuth.authState.pipe(
@@ -45,6 +45,11 @@ export class AuthService {
     } else {
       return this.afs.doc<User>(`users/${this.uid}`);
     }
+  }
+
+  async getUserByID(id: string): Promise<User> {
+    let doc = await this.afs.doc(`users/${id}`).get().toPromise();
+    return doc.data() as User;
   }
 
   async googleSignin() {

@@ -1,14 +1,14 @@
 <div class="center">
     <mat-card class="user-card">
         <mat-card-header>
-            <ngx-avatar mat-card-avatar class="avatar-header-image" src="{{ userData.photoURL }}"></ngx-avatar>
+            <ngx-avatar mat-card-avatar class="avatar-header-image" src="{{ user.photoURL }}"></ngx-avatar>
             <!-- <div mat-card-avatar class="example-header-image"></div> -->
-            <mat-card-title>{{ userData.displayName }}</mat-card-title>
-            <mat-card-subtitle>{{ userData.email }}</mat-card-subtitle>
+            <mat-card-title>{{ user.displayName }}</mat-card-title>
+            <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
         </mat-card-header>
         <div class="center">
             This is your Profile view.<br>
-            Your UID: {{ userData.uid }}
+            Your UID: {{ user.uid }}
         </div>
         <mat-card-content>
             
@@ -29,10 +29,11 @@
 
 <div class="container">
   <h2>
-    <span>My Countdowns</span>
+    <span>{{user.displayName}}'s Countdowns</span>
     <span class="flex-spacer"></span>
     <button mat-button [routerLink]="'/events/create'"><mat-icon>plus_one</mat-icon></button>
   </h2>
   
   <app-cd-list [usePassedData]='true' [passedData]='userEvents' ></app-cd-list>
 </div>
+

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 import { User } from '../../models/user.model';
 import { Event } from '../../models/event.model';
+import { placeholderUser } from '../../models/placeholder';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -22,12 +23,7 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize with placeholder data
-    this.userData = {
-      displayName: 'Loading...',
-      email: 'Loading...',
-      photoURL: '',
-      uid: 'Loading...'
-    };
+    this.userData = placeholderUser;
     this.userEvents = [];
 
   this.auth.user$.subscribe(data => {
