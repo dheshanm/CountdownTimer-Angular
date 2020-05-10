@@ -7,9 +7,11 @@ import { CreateCdComponent } from 'src/app/components/create-cd/create-cd.compon
 import { CdListComponent } from 'src/app/components/cd-list/cd-list.component'
 import { EventsComponent  } from 'src/app/components/events/events.component'
 import { EventDetailsComponent } from 'src/app/components/event-details/event-details.component'
+import { UserDashboardComponent } from 'src/app/components/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
+  { path: 'account', component: UserDashboardComponent},
   { path: 'events', 
     component: EventsComponent,
     children: [

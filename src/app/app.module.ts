@@ -49,6 +49,7 @@ import { AuthService } from './services/auth.service';
 
 // Directives
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     EventsComponent,
     EventDetailsComponent,
     ClickStopPropagationDirective,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,

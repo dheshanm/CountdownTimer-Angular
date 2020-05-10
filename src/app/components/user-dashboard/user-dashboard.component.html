@@ -1,0 +1,28 @@
+<div class="center">
+    <mat-card class="user-card">
+        <mat-card-header>
+            <ngx-avatar mat-card-avatar class="avatar-header-image" src="{{ userData.photoURL }}"></ngx-avatar>
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <mat-card-title>{{ userData.displayName }}</mat-card-title>
+            <mat-card-subtitle>{{ userData.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <div class="center">
+            This is your Profile view.<br>
+            Your UID: {{ userData.uid }}
+        </div>
+        <mat-card-content>
+            
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-chip-list aria-label="Tags">
+                <!-- <b>Tags: </b> -->
+                <!-- <mat-chip *ngFor='let tag of data.tags'>{{ tag }}</mat-chip> -->
+                <span class="flex-spacer"></span>
+                <div>
+                    <button mat-button><mat-icon>favorite_border</mat-icon></button>
+                    <button mat-button><mat-icon>share</mat-icon>Share</button>
+                </div>
+            </mat-chip-list>
+        </mat-card-actions>
+    </mat-card>
+</div>
