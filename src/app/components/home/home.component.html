@@ -1,3 +1,10 @@
 <app-carousel></app-carousel>
 <mat-divider></mat-divider>
-<app-cd-list></app-cd-list>
+<div class="container">
+    <h2>
+        <span>Top Countdowns</span>
+        <span class="flex-spacer"></span>
+        <button mat-button [routerLink]="'/events/create'"><mat-icon>plus_one</mat-icon></button>
+      </h2>
+    <app-cd-list></app-cd-list>
+</div>

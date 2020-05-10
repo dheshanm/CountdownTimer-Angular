@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.avatar-header-image {
+  background-size: cover;
+  padding-right: 0.5em;
+}
+
+.user-card {
+  width: 80vh;
+  max-width: 800px;
+  margin: 2em;
+}
+

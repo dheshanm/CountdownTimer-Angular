@@ -123,3 +123,8 @@ export function copyID(id:string): void {
   _BASE_URL = window.location.origin;
   copyTextToClipboard(_BASE_URL + "/events/" + id);
 }
+
+export function copyUserID(id:string): void {
+  _BASE_URL = window.location.origin;
+  copyTextToClipboard(_BASE_URL + "/user/" + id);
+}
