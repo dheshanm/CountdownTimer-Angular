@@ -9,6 +9,7 @@ import { User } from '../../models/user.model';
 import { placeholderUser } from '../../models/placeholder';
 
 import { switchMap } from 'rxjs/operators';
+import { copyUserID } from 'src/app/utils';
 
 @Component({
   selector: 'app-user-details',
@@ -46,5 +47,11 @@ export class UserDetailsComponent implements OnInit {
       }
     })
   }
+
+    // Wrapper function for copyUserID from utils
+    copyUserID(): void{
+      // Call copyUserID from utils
+      copyUserID(this.user.uid);
+    }
 
 }

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from '../../models/user.model';
 import { Event } from '../../models/event.model';
 import { placeholderUser } from '../../models/placeholder';
+import { copyUserID } from '../../utils'
 
 @Component({
   selector: 'app-user-dashboard',
@@ -37,6 +38,12 @@ export class UserDashboardComponent implements OnInit {
       });
     }
   });
+  }
+
+  // Wrapper function for copyUserID from utils
+  copyUserID(): void{
+    // Call copyUserID from utils
+    copyUserID(this.userData.uid);
   }
 
 }
