@@ -14,6 +14,9 @@ import { incrementCount, copyID } from '../../utils'
 export class FeaturedCardComponent implements OnInit {
   @Input() data: Event;
   _BASE_URL = "https://countdowntimer-angular.web.app/";
+  username: string;
+  userImage: string;
+  userUrl: string;
 
   constructor(private firebaseService: FirebaseEventService) { }
 
@@ -21,7 +24,16 @@ export class FeaturedCardComponent implements OnInit {
     // console.log(this.data);
 
     // Check if running Locally
-    this._BASE_URL = window.location.origin
+    this._BASE_URL = window.location.origin;
+
+    // setup URL to user page
+    this.userUrl = `/user/${this.data.userID}`;
+
+    // get User PhotoUrl
+    this.firebaseService.getUserByUID(this.data.userID).then(user => {
+      this.userImage = user.photoURL;
+      this.username = user.displayName;
+    })
   }
 
   incrementCountInternal(): void {

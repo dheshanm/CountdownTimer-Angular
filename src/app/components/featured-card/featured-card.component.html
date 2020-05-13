@@ -20,6 +20,10 @@
         </mat-card-content>
         <mat-card-actions>
             <mat-chip-list aria-label="Tags">
+                <button mat-button [routerLink]='userUrl'>
+                    <img src="{{ userImage }}" width="48px">
+                    {{ username }}
+                </button>
                 <!-- <b>Tags: </b> -->
                 <!-- <mat-chip *ngFor='let tag of data.tags'>{{ tag }}</mat-chip> -->
                 <span class="flex-spacer"></span>

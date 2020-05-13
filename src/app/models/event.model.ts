@@ -7,4 +7,5 @@ export interface Event {
   content?: string;
   time_unix?: number;
   tags?: string[];
+  userID?: string;
 }

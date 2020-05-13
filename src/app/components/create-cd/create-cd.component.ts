@@ -77,6 +77,13 @@ export class CreateCdComponent implements OnInit {
   processForm(toSubmit: Boolean): void {
     let nameForm = this.nameFormGroup.value;
     let descriptionForm = this.descriptionFormGroup.value;
+    let currentUserID = 'guest-user'
+    let isLoggedIn: boolean = false;
+
+    if (this.auth.getUser()) {
+      isLoggedIn = true;
+      currentUserID = this.auth.getUserID();
+    }
 
     // Destructure the FormGroup data
     this.data = {
@@ -86,7 +93,8 @@ export class CreateCdComponent implements OnInit {
       count: 1,
       content: descriptionForm['content'],
       time_unix: (new Date(descriptionForm['datetime']).getTime() / 1000) + (60*60),
-      tags: this.processTags(descriptionForm['tags'])
+      tags: this.processTags(descriptionForm['tags']),
+      userID: currentUserID,
     }
 
     // DO NOT execute this if for preview only
@@ -95,7 +103,7 @@ export class CreateCdComponent implements OnInit {
       if (this.validate(this.data)) {
         const id = this.eventService.addItemAsync(this.data);
         // Add UID to User model ONLY if logged in
-        if (this.auth.getUser()) {
+        if (isLoggedIn) {
           id.then(id => {
             this.updateUser(this.auth.user$, id);
           });

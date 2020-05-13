@@ -21,6 +21,10 @@
                     <mat-chip *ngFor='let tag of data.tags'>{{ tag }}</mat-chip>
                     <span class="flex-spacer"></span>
                     <div>
+                        <button mat-button click-stop-propagation [routerLink]='userUrl'>
+                            <img src="{{ userImage }}" width="32px">
+                            {{ username }}
+                        </button>
                         <button mat-button click-stop-propagation (click)="incrementCountInternal()"><mat-icon>favorite_border</mat-icon> {{ data.count }}</button>
                         <button mat-button click-stop-propagation (click)="copyID()"><mat-icon>share</mat-icon></button>
                     </div>
