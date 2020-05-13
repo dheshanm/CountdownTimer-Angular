@@ -10,9 +10,11 @@ import { EventDetailsComponent } from 'src/app/components/event-details/event-de
 import { UserDashboardComponent } from 'src/app/components/user-dashboard/user-dashboard.component';
 import { UserDetailsComponent } from 'src/app/components/user-details/user-details.component';
 
+import { AuthGuard } from './services/auth.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'account', component: UserDashboardComponent},
+  { path: 'account', component: UserDashboardComponent, canActivate: [AuthGuard]},
   { path: 'user/:uid', component: UserDetailsComponent},
   { path: 'events', 
     component: EventsComponent,
