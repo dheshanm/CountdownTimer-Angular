@@ -6,6 +6,7 @@ import {
 } from 'angularfire2/firestore';
 
 import { Event } from '../models/event.model'
+import { User } from '../models/user.model';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -53,7 +54,14 @@ export class FirebaseEventService {
 
   async getItemByID(id: string): Promise<Event> {
     let doc = await this.afs.doc(`countdowns/${id}`).get().toPromise();
-    return doc.data() as Event;
+    let event = doc.data() as Event;
+    event["id"] = id;
+    return event;
+  }
+
+  async getUserByUID(uid: string): Promise<User> {
+    let doc = await this.afs.doc(`users/${uid}`).get().toPromise();
+    return doc.data() as User;
   }
 
   addItem(item: Event): Promise<string> {

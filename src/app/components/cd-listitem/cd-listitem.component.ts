@@ -13,10 +13,22 @@ import { incrementCount, copyID } from '../../utils'
 })
 export class CdListitemComponent implements OnInit {
   @Input() data: Event;
+  username: string;
+  userImage: string;
+  userUrl: string;
 
   constructor(private eventService: FirebaseEventService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // setup URL to user page
+    this.userUrl = `/user/${this.data.userID}`;
+
+    // get User PhotoUrl
+    this.eventService.getUserByUID(this.data.userID).then(user => {
+      this.userImage = user.photoURL;
+      this.username = user.displayName;
+    })
+  }
 
   incrementCountInternal(): void {
     incrementCount(this.eventService, this.data);
