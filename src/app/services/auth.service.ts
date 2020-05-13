@@ -47,6 +47,13 @@ export class AuthService {
     }
   }
 
+  getUserID() {
+    if (this.uid == null) {
+      return 'guest-user'
+    }
+    return this.uid;
+  }
+
   async getUserByID(id: string): Promise<User> {
     let doc = await this.afs.doc(`users/${id}`).get().toPromise();
     return doc.data() as User;
