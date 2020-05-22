@@ -55,7 +55,7 @@ export class FlipDownComponent implements OnInit, OnChanges {
 
     let dateString = new Date(time_unix * 1000).toLocaleString();
 
-    date.innerHTML = `The Event was scheduled to start at ${ dateString } (${Intl.DateTimeFormat().resolvedOptions().timeZone})`
+    date.innerHTML = `This Event was scheduled to start at ${ dateString } (${Intl.DateTimeFormat().resolvedOptions().timeZone})`
 
     // Set ID for newClock
     date.id = id;
