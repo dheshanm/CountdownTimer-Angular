@@ -84,8 +84,6 @@ export class AuthService {
       data["events"] = user.events;
     }
 
-    console.log(data);
     return userRef.set(data, { merge: true });
   }
-
 }

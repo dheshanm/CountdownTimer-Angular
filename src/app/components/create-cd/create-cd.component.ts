@@ -95,6 +95,7 @@ export class CreateCdComponent implements OnInit {
       time_unix: (new Date(descriptionForm['datetime']).getTime() / 1000) + (60*60),
       tags: this.processTags(descriptionForm['tags']),
       userID: currentUserID,
+      isDeleted: false
     }
 
     // DO NOT execute this if for preview only

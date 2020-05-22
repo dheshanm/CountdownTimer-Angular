@@ -25,6 +25,8 @@
                             <img src="{{ userImage }}" width="32px">
                             {{ username }}
                         </button>
+                        <button *ngIf='auth.getUserID() == data.userID && data.isDeleted' (click)="restoreEvent()" mat-button click-stop-propagation><mat-icon>delete</mat-icon></button>
+                        <button *ngIf='auth.getUserID() == data.userID && !data.isDeleted' (click)="deleteEvent()" mat-button click-stop-propagation><mat-icon>delete_outline</mat-icon></button>
                         <button mat-button click-stop-propagation (click)="incrementCountInternal()"><mat-icon>favorite_border</mat-icon> {{ data.count }}</button>
                         <button mat-button click-stop-propagation (click)="copyID()"><mat-icon>share</mat-icon></button>
                     </div>

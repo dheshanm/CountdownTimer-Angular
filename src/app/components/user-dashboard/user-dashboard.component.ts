@@ -33,7 +33,6 @@ export class UserDashboardComponent implements OnInit {
       this.eventService.getItemByID(eventID).then(event => {
         if (event != undefined) {
           this.userEvents.push(event);
-          console.log(event);
         }
       });
     }
