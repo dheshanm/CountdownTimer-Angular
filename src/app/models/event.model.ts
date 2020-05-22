@@ -8,4 +8,5 @@ export interface Event {
   time_unix?: number;
   tags?: string[];
   userID?: string;
+  isDeleted?: boolean;
 }

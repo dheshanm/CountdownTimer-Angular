@@ -22,8 +22,8 @@ export class FirebaseEventService {
   countdownDoc: AngularFirestoreDocument<Event>;
 
   constructor(public afs:AngularFirestore) {
-    this.countdownCollection = this.afs.collection('countdowns', ref => ref.orderBy('count', 'desc'));
-    this.featuredCollection  = this.afs.collection('countdowns', ref => ref.where("isFeatured", "==", true));
+    this.countdownCollection = this.afs.collection('countdowns', ref => ref.where("isDeleted", "==", false).orderBy('count', 'desc'));
+    this.featuredCollection  = this.afs.collection('countdowns', ref => ref.where("isDeleted", "==", false).where("isFeatured", "==", true));
 
     this.countdowns = this.countdownCollection.snapshotChanges().pipe(
       map((changes): Event[] => {
@@ -45,7 +45,7 @@ export class FirebaseEventService {
   }
 
   getTopCountdowns(numberToFetch: number = 10): Observable<Event[]> {
-    let cdCollection = this.afs.collection('countdowns', ref => ref.orderBy('count', 'desc').limit(numberToFetch));
+    let cdCollection = this.afs.collection('countdowns', ref => ref.where("isDeleted", "==", false).orderBy('count', 'desc').limit(numberToFetch));
 
     let data = cdCollection.snapshotChanges().pipe(
       map((changes): Event[] => {

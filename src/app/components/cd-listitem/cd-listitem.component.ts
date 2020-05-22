@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { FirebaseEventService } from "../../services/firebase-event.service"
+import { AuthService } from "../../services/auth.service"
 
 import { Event } from '../../models/event.model';
 
@@ -17,7 +18,10 @@ export class CdListitemComponent implements OnInit {
   userImage: string;
   userUrl: string;
 
-  constructor(private eventService: FirebaseEventService) { }
+  constructor(
+    private eventService: FirebaseEventService,
+    public auth: AuthService,
+    ) { }
 
   ngOnInit(): void {
     // setup URL to user page
@@ -32,6 +36,16 @@ export class CdListitemComponent implements OnInit {
 
   incrementCountInternal(): void {
     incrementCount(this.eventService, this.data);
+  }
+
+  deleteEvent(): void {
+    this.data.isDeleted = true;
+    this.eventService.updateItem(this.data);
+  }
+
+  restoreEvent(): void {
+    this.data.isDeleted = false;
+    this.eventService.updateItem(this.data);
   }
 
   // Wrapper function for copyID from utils
