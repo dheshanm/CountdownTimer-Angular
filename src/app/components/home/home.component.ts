@@ -9,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class HomeComponent implements OnInit {
+  eventsToFetch: number;
 
-  constructor() { }
+  constructor() {
+    // Define the number of Events to consider under the 'Top Countdowns' section
+    this.eventsToFetch = 5;
+  }
 
   ngOnInit(): void {
   }

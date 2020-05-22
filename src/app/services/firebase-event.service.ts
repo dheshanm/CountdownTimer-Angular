@@ -44,6 +44,21 @@ export class FirebaseEventService {
     }));
   }
 
+  getTopCountdowns(numberToFetch: number = 10): Observable<Event[]> {
+    let cdCollection = this.afs.collection('countdowns', ref => ref.orderBy('count', 'desc').limit(numberToFetch));
+
+    let data = cdCollection.snapshotChanges().pipe(
+      map((changes): Event[] => {
+      return changes.map( (docChanges): Event => {
+        const data = docChanges.payload.doc.data() as Event;
+        data.id = docChanges.payload.doc.id;
+        return data;
+      });
+    }));
+
+    return data;
+  }
+
   getItems(): Observable<Event[]> {
     return this.countdowns;
   }
