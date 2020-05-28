@@ -8,7 +8,7 @@ Check out CWF's [github page](https://scottkwang.github.io/CodeWithFriends-Sprin
 
 This project is a simple Angular implementation of a Catalogue of Countdowns, to anything. It allows you to create and track countdown to any Event or Activity and then view the countdown to the event in real-time.
 
-![countdown-landing-page](docs/assets/landing.png)
+![countdown-landing-page](docs/assets/landing_new.png)
 
 ## Deployment and Code Quality
 
